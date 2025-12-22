@@ -1,0 +1,1551 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="CPAC 모델 vs 빌딩업 모델 비교 분석 - 페이스메이커 전략 보고서"
+    />
+    <title>CPAC 모델 전략 분석 보고서 | Pacemaker</title>
+
+    <!-- Fonts: Professional serif + sans-serif combination -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;600;700&family=Noto+Sans+KR:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      /* ============================================
+           1. CSS CUSTOM PROPERTIES (Design Tokens)
+           ============================================ */
+      :root {
+        /* McKinsey-inspired Color Palette */
+        --color-primary: #051c2c; /* Deep Navy - Main brand color */
+        --color-secondary: #0f4c81; /* McKinsey Blue */
+        --color-accent: #00a3e0; /* Bright Blue - Highlights */
+        --color-accent-alt: #2d9cdb; /* Secondary Accent */
+
+        /* Neutral Colors */
+        --color-white: #ffffff;
+        --color-gray-50: #f8f9fa;
+        --color-gray-100: #f1f3f5;
+        --color-gray-200: #e9ecef;
+        --color-gray-300: #dee2e6;
+        --color-gray-400: #ced4da;
+        --color-gray-500: #adb5bd;
+        --color-gray-600: #6c757d;
+        --color-gray-700: #495057;
+        --color-gray-800: #343a40;
+        --color-gray-900: #212529;
+
+        /* Semantic Colors */
+        --color-success: #198754;
+        --color-warning: #ffc107;
+        --color-warning-bg: #fff8e1;
+        --color-danger: #dc3545;
+
+        /* Typography */
+        --font-serif: "Noto Serif KR", Georgia, "Times New Roman", serif;
+        --font-sans: "Noto Sans KR", -apple-system, BlinkMacSystemFont,
+          "Segoe UI", sans-serif;
+
+        /* Spacing Scale */
+        --space-xs: 0.25rem; /* 4px */
+        --space-sm: 0.5rem; /* 8px */
+        --space-md: 1rem; /* 16px */
+        --space-lg: 1.5rem; /* 24px */
+        --space-xl: 2rem; /* 32px */
+        --space-2xl: 3rem; /* 48px */
+        --space-3xl: 4rem; /* 64px */
+
+        /* Border Radius */
+        --radius-sm: 4px;
+        --radius-md: 8px;
+        --radius-lg: 12px;
+
+        /* Shadows */
+        --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+        --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.07);
+        --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+
+        /* Focus Ring for Accessibility */
+        --focus-ring: 0 0 0 3px rgba(0, 163, 224, 0.4);
+      }
+
+      /* ============================================
+           2. RESET & BASE STYLES
+           ============================================ */
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      html {
+        font-size: 16px;
+        scroll-behavior: smooth;
+      }
+
+      body {
+        font-family: var(--font-sans);
+        font-size: 1rem;
+        line-height: 1.7;
+        color: var(--color-gray-800);
+        background-color: var(--color-white);
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+
+      /* Skip Link for Screen Readers */
+      .skip-link {
+        position: absolute;
+        top: -100%;
+        left: 0;
+        background: var(--color-primary);
+        color: var(--color-white);
+        padding: var(--space-sm) var(--space-md);
+        z-index: 1000;
+        text-decoration: none;
+      }
+
+      .skip-link:focus {
+        top: 0;
+      }
+
+      /* Focus States for Accessibility */
+      a:focus,
+      button:focus,
+      input:focus,
+      select:focus,
+      textarea:focus {
+        outline: none;
+        box-shadow: var(--focus-ring);
+      }
+
+      /* ============================================
+           3. TYPOGRAPHY
+           ============================================ */
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6 {
+        font-family: var(--font-serif);
+        font-weight: 600;
+        line-height: 1.3;
+        color: var(--color-primary);
+      }
+
+      h1 {
+        font-size: 2.5rem;
+        letter-spacing: -0.02em;
+      }
+      h2 {
+        font-size: 1.75rem;
+      }
+      h3 {
+        font-size: 1.25rem;
+      }
+      h4 {
+        font-size: 1.125rem;
+      }
+
+      p {
+        margin-bottom: var(--space-md);
+      }
+
+      strong {
+        font-weight: 600;
+        color: var(--color-gray-900);
+      }
+
+      /* ============================================
+           4. LAYOUT
+           ============================================ */
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 var(--space-lg);
+      }
+
+      .page-wrapper {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+      }
+
+      /* ============================================
+           5. HEADER
+           ============================================ */
+      .report-header {
+        background: linear-gradient(
+          135deg,
+          var(--color-primary) 0%,
+          var(--color-secondary) 100%
+        );
+        color: var(--color-white);
+        padding: var(--space-3xl) 0;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .report-header::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 40%;
+        height: 100%;
+        background: linear-gradient(
+          135deg,
+          transparent 0%,
+          rgba(0, 163, 224, 0.1) 100%
+        );
+      }
+
+      .header-content {
+        position: relative;
+        z-index: 1;
+      }
+
+      .report-type {
+        font-family: var(--font-sans);
+        font-size: 0.75rem;
+        font-weight: 600;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        color: var(--color-accent);
+        margin-bottom: var(--space-md);
+        display: block;
+      }
+
+      .report-title {
+        font-family: var(--font-serif);
+        font-size: clamp(2rem, 5vw, 3rem);
+        font-weight: 700;
+        color: var(--color-white);
+        margin-bottom: var(--space-md);
+        line-height: 1.2;
+      }
+
+      .report-subtitle {
+        font-size: 1.25rem;
+        font-weight: 400;
+        color: rgba(255, 255, 255, 0.85);
+        max-width: 600px;
+      }
+
+      .header-meta {
+        display: flex;
+        gap: var(--space-xl);
+        margin-top: var(--space-xl);
+        padding-top: var(--space-lg);
+        border-top: 1px solid rgba(255, 255, 255, 0.2);
+      }
+
+      .meta-item {
+        font-size: 0.875rem;
+      }
+
+      .meta-label {
+        color: rgba(255, 255, 255, 0.6);
+        display: block;
+        font-size: 0.75rem;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        margin-bottom: var(--space-xs);
+      }
+
+      .meta-value {
+        color: var(--color-white);
+        font-weight: 500;
+      }
+
+      /* ============================================
+           6. EXECUTIVE SUMMARY BAR
+           ============================================ */
+      .executive-summary {
+        background-color: var(--color-gray-900);
+        color: var(--color-white);
+        padding: var(--space-lg) 0;
+      }
+
+      .summary-content {
+        display: flex;
+        align-items: center;
+        gap: var(--space-lg);
+      }
+
+      .summary-label {
+        font-size: 0.75rem;
+        font-weight: 600;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--color-accent);
+        white-space: nowrap;
+      }
+
+      .summary-text {
+        font-size: 1rem;
+        line-height: 1.5;
+        margin: 0;
+      }
+
+      .summary-highlight {
+        color: var(--color-accent);
+        font-weight: 600;
+      }
+
+      /* ============================================
+           7. MAIN CONTENT
+           ============================================ */
+      main {
+        flex: 1;
+        padding: var(--space-3xl) 0;
+        background-color: var(--color-gray-50);
+      }
+
+      .content-grid {
+        display: grid;
+        grid-template-columns: repeat(12, 1fr);
+        gap: var(--space-xl);
+      }
+
+      /* ============================================
+           8. SECTION STYLES
+           ============================================ */
+      .section {
+        background-color: var(--color-white);
+        border-radius: var(--radius-lg);
+        box-shadow: var(--shadow-md);
+        padding: var(--space-xl);
+        margin-bottom: var(--space-xl);
+      }
+
+      .section-number {
+        font-family: var(--font-serif);
+        font-size: 0.875rem;
+        font-weight: 700;
+        color: var(--color-accent);
+        display: block;
+        margin-bottom: var(--space-sm);
+      }
+
+      .section-title {
+        font-size: 1.5rem;
+        margin-bottom: var(--space-lg);
+        padding-bottom: var(--space-md);
+        border-bottom: 2px solid var(--color-gray-200);
+      }
+
+      .section-intro {
+        font-size: 1.0625rem;
+        color: var(--color-gray-700);
+        margin-bottom: var(--space-lg);
+      }
+
+      /* ============================================
+           9. DATA TABLE
+           ============================================ */
+      .data-table-wrapper {
+        overflow-x: auto;
+        margin: var(--space-lg) 0;
+        border-radius: var(--radius-md);
+        border: 1px solid var(--color-gray-200);
+      }
+
+      .data-table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 0.9375rem;
+      }
+
+      .data-table caption {
+        padding: var(--space-md);
+        font-weight: 600;
+        text-align: left;
+        background-color: var(--color-gray-100);
+        border-bottom: 1px solid var(--color-gray-200);
+      }
+
+      .data-table th {
+        background-color: var(--color-primary);
+        color: var(--color-white);
+        font-weight: 600;
+        padding: var(--space-md);
+        text-align: left;
+        font-size: 0.875rem;
+      }
+
+      .data-table th[scope="row"] {
+        background-color: var(--color-gray-100);
+        color: var(--color-gray-800);
+        font-weight: 600;
+      }
+
+      .data-table td {
+        padding: var(--space-md);
+        border-bottom: 1px solid var(--color-gray-200);
+        vertical-align: top;
+      }
+
+      .data-table tr:last-child td {
+        border-bottom: none;
+      }
+
+      .data-table tr:hover td {
+        background-color: var(--color-gray-50);
+      }
+
+      .data-table .highlight-cell {
+        background-color: rgba(0, 163, 224, 0.08);
+      }
+
+      .data-table .model-recommended {
+        background-color: var(--color-secondary);
+      }
+
+      .data-table .model-alternative {
+        background-color: var(--color-gray-600);
+      }
+
+      /* ============================================
+           10. KEY INSIGHTS BOX
+           ============================================ */
+      .insight-box {
+        background: linear-gradient(
+          135deg,
+          var(--color-primary) 0%,
+          var(--color-secondary) 100%
+        );
+        color: var(--color-white);
+        padding: var(--space-lg);
+        border-radius: var(--radius-md);
+        margin: var(--space-lg) 0;
+      }
+
+      .insight-box h4 {
+        color: var(--color-accent);
+        font-family: var(--font-sans);
+        font-size: 0.75rem;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        margin-bottom: var(--space-md);
+      }
+
+      .insight-list {
+        list-style: none;
+      }
+
+      .insight-list li {
+        padding: var(--space-sm) 0;
+        padding-left: var(--space-lg);
+        position: relative;
+        font-size: 0.9375rem;
+        line-height: 1.6;
+        color: var(--color-white);
+      }
+
+      .insight-list li strong {
+        color: var(--color-accent);
+      }
+
+      .insight-list li::before {
+        content: "→";
+        position: absolute;
+        left: 0;
+        color: var(--color-accent);
+        font-weight: bold;
+      }
+
+      /* ============================================
+           11. TWO-TRACK STRATEGY CARDS
+           ============================================ */
+      .strategy-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: var(--space-lg);
+        margin: var(--space-lg) 0;
+      }
+
+      .strategy-card {
+        border-radius: var(--radius-md);
+        padding: var(--space-lg);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .strategy-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 4px;
+        height: 100%;
+      }
+
+      .strategy-card.track-a {
+        background-color: var(--color-gray-50);
+        border: 1px solid var(--color-gray-200);
+      }
+
+      .strategy-card.track-a::before {
+        background-color: var(--color-primary);
+      }
+
+      .strategy-card.track-b {
+        background-color: #fff8f5;
+        border: 1px solid #ffe4d6;
+      }
+
+      .strategy-card.track-b::before {
+        background-color: var(--color-accent);
+      }
+
+      .track-badge {
+        display: inline-block;
+        padding: var(--space-xs) var(--space-sm);
+        border-radius: var(--radius-sm);
+        font-size: 0.6875rem;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        margin-bottom: var(--space-md);
+      }
+
+      .track-a .track-badge {
+        background-color: var(--color-primary);
+        color: var(--color-white);
+      }
+
+      .track-b .track-badge {
+        background-color: var(--color-accent);
+        color: var(--color-white);
+      }
+
+      .track-title {
+        font-family: var(--font-serif);
+        font-size: 1.125rem;
+        font-weight: 600;
+        margin-bottom: var(--space-sm);
+      }
+
+      .track-subtitle {
+        font-size: 0.875rem;
+        color: var(--color-gray-600);
+        margin-bottom: var(--space-md);
+        padding-bottom: var(--space-md);
+        border-bottom: 1px solid var(--color-gray-200);
+      }
+
+      .track-list {
+        list-style: none;
+      }
+
+      .track-list li {
+        padding: var(--space-sm) 0;
+        font-size: 0.875rem;
+        display: flex;
+        align-items: flex-start;
+        gap: var(--space-sm);
+      }
+
+      .track-list li::before {
+        content: "✓";
+        color: var(--color-success);
+        font-weight: bold;
+        flex-shrink: 0;
+      }
+
+      /* ============================================
+           12. PROCESS FLOW
+           ============================================ */
+      .process-flow {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: var(--space-md);
+        padding: var(--space-xl);
+        background-color: var(--color-gray-50);
+        border-radius: var(--radius-md);
+        margin: var(--space-lg) 0;
+        flex-wrap: wrap;
+      }
+
+      .process-step {
+        text-align: center;
+        padding: var(--space-md);
+        min-width: 120px;
+      }
+
+      .process-icon {
+        width: 56px;
+        height: 56px;
+        background: linear-gradient(
+          135deg,
+          var(--color-secondary) 0%,
+          var(--color-accent) 100%
+        );
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto var(--space-sm);
+        font-size: 1.5rem;
+      }
+
+      .process-label {
+        font-weight: 600;
+        font-size: 0.875rem;
+        color: var(--color-gray-800);
+      }
+
+      .process-desc {
+        font-size: 0.75rem;
+        color: var(--color-gray-600);
+        margin-top: var(--space-xs);
+      }
+
+      .process-arrow {
+        color: var(--color-gray-400);
+        font-size: 1.5rem;
+      }
+
+      /* ============================================
+           13. ALERT BOXES
+           ============================================ */
+      .alert {
+        padding: var(--space-md);
+        border-radius: var(--radius-md);
+        margin: var(--space-lg) 0;
+        display: flex;
+        align-items: flex-start;
+        gap: var(--space-md);
+      }
+
+      .alert-icon {
+        font-size: 1.25rem;
+        flex-shrink: 0;
+      }
+
+      .alert-content {
+        flex: 1;
+      }
+
+      .alert-title {
+        font-weight: 600;
+        margin-bottom: var(--space-xs);
+      }
+
+      .alert-warning {
+        background-color: var(--color-warning-bg);
+        border-left: 4px solid var(--color-warning);
+      }
+
+      .alert-warning .alert-title {
+        color: #856404;
+      }
+
+      .alert-warning p {
+        color: #6c5d3a;
+        margin: 0;
+        font-size: 0.875rem;
+      }
+
+      /* ============================================
+           14. ROADMAP / STEPS
+           ============================================ */
+      .roadmap {
+        position: relative;
+        padding-left: var(--space-xl);
+      }
+
+      .roadmap::before {
+        content: "";
+        position: absolute;
+        left: 11px;
+        top: 0;
+        bottom: 0;
+        width: 2px;
+        background: linear-gradient(
+          to bottom,
+          var(--color-primary) 0%,
+          var(--color-accent) 100%
+        );
+      }
+
+      .roadmap-step {
+        position: relative;
+        padding-bottom: var(--space-xl);
+      }
+
+      .roadmap-step:last-child {
+        padding-bottom: 0;
+      }
+
+      .step-marker {
+        position: absolute;
+        left: calc(-1 * var(--space-xl) + 4px);
+        width: 16px;
+        height: 16px;
+        background-color: var(--color-white);
+        border: 3px solid var(--color-primary);
+        border-radius: 50%;
+      }
+
+      .roadmap-step.active .step-marker {
+        background-color: var(--color-primary);
+      }
+
+      .step-badge {
+        display: inline-block;
+        padding: var(--space-xs) var(--space-sm);
+        border-radius: var(--radius-sm);
+        font-size: 0.6875rem;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        margin-bottom: var(--space-sm);
+      }
+
+      .step-badge.nonprofit {
+        background-color: var(--color-primary);
+        color: var(--color-white);
+      }
+
+      .step-badge.profit {
+        background-color: var(--color-accent);
+        color: var(--color-white);
+      }
+
+      .step-title {
+        font-family: var(--font-serif);
+        font-size: 1.125rem;
+        font-weight: 600;
+        margin-bottom: var(--space-sm);
+      }
+
+      .step-description {
+        font-size: 0.9375rem;
+        color: var(--color-gray-700);
+        line-height: 1.7;
+      }
+
+      .step-description ul {
+        margin-top: var(--space-sm);
+        padding-left: var(--space-lg);
+      }
+
+      .step-description li {
+        margin-bottom: var(--space-xs);
+      }
+
+      /* ============================================
+           15. KEY STRATEGY QUOTE
+           ============================================ */
+      .strategy-quote {
+        background-color: var(--color-primary);
+        color: var(--color-white);
+        padding: var(--space-xl);
+        border-radius: var(--radius-lg);
+        text-align: center;
+        margin: var(--space-xl) 0;
+      }
+
+      .strategy-quote blockquote {
+        font-family: var(--font-serif);
+        font-size: 1.25rem;
+        font-style: italic;
+        line-height: 1.6;
+        margin: 0;
+      }
+
+      .strategy-quote .highlight {
+        color: var(--color-accent);
+        font-weight: 600;
+      }
+
+      .strategy-quote cite {
+        display: block;
+        margin-top: var(--space-md);
+        font-size: 0.875rem;
+        font-style: normal;
+        color: rgba(255, 255, 255, 0.7);
+      }
+
+      /* ============================================
+           16. FOOTER
+           ============================================ */
+      .report-footer {
+        background-color: var(--color-gray-900);
+        color: var(--color-white);
+        padding: var(--space-xl) 0;
+        margin-top: auto;
+      }
+
+      .footer-content {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: var(--space-md);
+      }
+
+      .footer-brand {
+        font-family: var(--font-serif);
+        font-size: 1.125rem;
+        font-weight: 600;
+      }
+
+      .footer-legal {
+        font-size: 0.75rem;
+        color: var(--color-gray-500);
+      }
+
+      /* ============================================
+           17. RESPONSIVE DESIGN
+           ============================================ */
+      @media (max-width: 1024px) {
+        .content-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .header-meta {
+          flex-wrap: wrap;
+          gap: var(--space-lg);
+        }
+      }
+
+      @media (max-width: 768px) {
+        html {
+          font-size: 15px;
+        }
+
+        .report-header {
+          padding: var(--space-2xl) 0;
+        }
+
+        .report-title {
+          font-size: 1.75rem;
+        }
+
+        .summary-content {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: var(--space-sm);
+        }
+
+        .section {
+          padding: var(--space-lg);
+        }
+
+        .process-flow {
+          flex-direction: column;
+        }
+
+        .process-arrow {
+          transform: rotate(90deg);
+        }
+
+        .footer-content {
+          flex-direction: column;
+          text-align: center;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .container {
+          padding: 0 var(--space-md);
+        }
+
+        .strategy-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      /* ============================================
+           18. PRINT STYLES
+           ============================================ */
+      @media print {
+        body {
+          background: white;
+          color: black;
+        }
+
+        .report-header {
+          background: var(--color-primary);
+          -webkit-print-color-adjust: exact;
+          print-color-adjust: exact;
+        }
+
+        .section {
+          box-shadow: none;
+          border: 1px solid var(--color-gray-300);
+          break-inside: avoid;
+        }
+      }
+
+      /* ============================================
+           19. REDUCED MOTION
+           ============================================ */
+      @media (prefers-reduced-motion: reduce) {
+        html {
+          scroll-behavior: auto;
+        }
+
+        *,
+        *::before,
+        *::after {
+          animation-duration: 0.01ms !important;
+          animation-iteration-count: 1 !important;
+          transition-duration: 0.01ms !important;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <a href="#main-content" class="skip-link">본문으로 바로가기</a>
+
+    <div class="page-wrapper">
+      <!-- Header -->
+      <header class="report-header" role="banner">
+        <div class="container">
+          <div class="header-content">
+            <span class="report-type">Strategic Analysis Report</span>
+            <h1 class="report-title">CPAC vs 빌딩업 모델 비교 분석</h1>
+            <p class="report-subtitle">
+              페이스메이커(Pacemaker) 조직 구조 최적화를 위한 전략 제안서
+            </p>
+
+            <div class="header-meta">
+              <div class="meta-item">
+                <span class="meta-label">Date</span>
+                <span class="meta-value">2025년 12월 21일</span>
+              </div>
+              <div class="meta-item">
+                <span class="meta-label">Department</span>
+                <span class="meta-value">Strategy Planning Unit</span>
+              </div>
+              <div class="meta-item">
+                <span class="meta-label">Classification</span>
+                <span class="meta-value">Internal Use Only</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <!-- Executive Summary Bar -->
+      <div class="executive-summary" role="region" aria-label="핵심 요약">
+        <div class="container">
+          <div class="summary-content">
+            <span class="summary-label">Executive Summary</span>
+            <p class="summary-text">
+              현 시점에서
+              <span class="summary-highlight">CPAC 모델(이원화 구조)</span>이
+              리스크 관리 및 수익성 측면에서 최적의 선택입니다.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Main Content -->
+      <main id="main-content" role="main">
+        <div class="container">
+          <!-- Section 1: Model Comparison -->
+          <section class="section" aria-labelledby="section1-title">
+            <span class="section-number">Section 01</span>
+            <h2 id="section1-title" class="section-title">모델 비교 분석</h2>
+            <p class="section-intro">
+              CPAC 모델과 빌딩업 모델의 핵심 차이점을 비교 분석한 결과,
+              페이스메이커의 현재 상황에서는 CPAC 모델이 전략적으로 유리합니다.
+            </p>
+
+            <div class="data-table-wrapper">
+              <table
+                class="data-table"
+                role="table"
+                aria-label="CPAC 모델과 빌딩업 모델 비교표"
+              >
+                <thead>
+                  <tr>
+                    <th scope="col" style="width: 18%">비교 항목</th>
+                    <th
+                      scope="col"
+                      class="model-recommended"
+                      style="width: 41%"
+                    >
+                      CPAC 모델 (권장)
+                    </th>
+                    <th
+                      scope="col"
+                      class="model-alternative"
+                      style="width: 41%"
+                    >
+                      빌딩업 모델
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th scope="row">핵심 구조</th>
+                    <td class="highlight-cell">
+                      <strong>영리 + 비영리 (2개 법인)</strong>
+                    </td>
+                    <td>단일 비영리 법인</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">운영 방식</th>
+                    <td class="highlight-cell">
+                      Two-track: 수익 사업과 공익 사업 분리 운영
+                    </td>
+                    <td>Integrated: 비즈니스 = 공익 활동</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">주 수입원</th>
+                    <td class="highlight-cell">
+                      비즈니스 매출 + 정부 펀딩/그랜트
+                    </td>
+                    <td>용역 계약 + 보조금 (의존도 높음)</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">핵심 장점</th>
+                    <td class="highlight-cell">
+                      <strong>안전성 & 유연성</strong> — 기존 자산 보호
+                    </td>
+                    <td>사회적 명분 명확, 단일 조직 효율성</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">주요 리스크</th>
+                    <td>이해상충(CRA) 규제 관리 복잡성</td>
+                    <td>
+                      <strong>초기 진입장벽 높음</strong>, 수익 악화 시 전사
+                      위기
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <!-- Key Insights -->
+            <div
+              class="insight-box"
+              role="region"
+              aria-label="CPAC 모델 도입 타당성"
+            >
+              <h4>Why CPAC? — 도입 타당성</h4>
+              <ul class="insight-list">
+                <li>
+                  <strong>자산 보호:</strong> 영리 법인의 소유권과 이익 잉여금을
+                  그대로 유지할 수 있습니다.
+                </li>
+                <li>
+                  <strong>파트너 요건:</strong> YMCA 등 파트너 기관은 계약용
+                  '비영리 사업자번호'만 필요로 합니다.
+                </li>
+                <li>
+                  <strong>Safety Net:</strong> 펀딩과 매출이 상호 보완하여 경영
+                  안정성을 확보합니다.
+                </li>
+                <li>
+                  <strong>업 특성:</strong> 코칭/교육은 무형 서비스로,
+                  유료(영리) + 무료(비영리) 투 트랙 전략이 적합합니다.
+                </li>
+              </ul>
+            </div>
+          </section>
+
+          <!-- Section 2: Two-Track Strategy -->
+          <section class="section" aria-labelledby="section2-title">
+            <span class="section-number">Section 02</span>
+            <h2 id="section2-title" class="section-title">
+              투 트랙 전략 (Two-Track Strategy)
+            </h2>
+            <p class="section-intro">
+              코칭 업의 특성을 고려하여 시장 논리에 부합하는 이원화 전략을
+              실행합니다.
+            </p>
+
+            <div class="strategy-grid">
+              <!-- Track A -->
+              <article
+                class="strategy-card track-a"
+                aria-labelledby="track-a-title"
+              >
+                <span class="track-badge">Track A — 비영리</span>
+                <h3 id="track-a-title" class="track-title">
+                  Paceup Career Society
+                </h3>
+                <p class="track-subtitle">💰 "정부가 돈을 낸다"</p>
+                <ul class="track-list">
+                  <li><strong>타겟:</strong> 영주권자, 난민 (무료 수강)</li>
+                  <li><strong>상품:</strong> IT/Design Bridging Program</li>
+                  <li>
+                    <strong>핵심:</strong> 지원금을 통해 멘토에게 정당한 보상
+                    지급
+                  </li>
+                  <li><strong>수익:</strong> 정부 펀딩 & 그랜트</li>
+                </ul>
+              </article>
+
+              <!-- Track B -->
+              <article
+                class="strategy-card track-b"
+                aria-labelledby="track-b-title"
+              >
+                <span class="track-badge">Track B — 영리</span>
+                <h3 id="track-b-title" class="track-title">Pacemaker Inc.</h3>
+                <p class="track-subtitle">💵 "고객이 돈을 낸다"</p>
+                <ul class="track-list">
+                  <li><strong>타겟:</strong> 유학생, 이직 희망 경력자</li>
+                  <li><strong>상품:</strong> Premium Portfolio Masterclass</li>
+                  <li><strong>핵심:</strong> 고수익성 1:1 심화 코칭 서비스</li>
+                  <li><strong>수익:</strong> 수강생 Tuition</li>
+                </ul>
+              </article>
+            </div>
+
+            <!-- Strategy Quote -->
+            <div class="strategy-quote">
+              <blockquote>
+                "비영리(Society)로
+                <span class="highlight">트래픽(Traffic)</span>을 모으고,<br />
+                영리(Inc.)로 <span class="highlight">수익(Profit)</span>을
+                극대화한다."
+              </blockquote>
+              <cite>— Pacemaker 핵심 전략 키워드</cite>
+            </div>
+          </section>
+
+          <!-- Section 3: Platform & Action Plan -->
+          <section class="section" aria-labelledby="section3-title">
+            <span class="section-number">Section 03</span>
+            <h2 id="section3-title" class="section-title">
+              플랫폼 전략 및 실행 계획
+            </h2>
+
+            <h3 style="font-size: 1.125rem; margin-bottom: var(--space-md)">
+              핵심 전략: Live & Archive
+            </h3>
+            <p class="section-intro">
+              강의를 미리 제작하지 않고, 라이브 멘토링 코스를 'Paceup'
+              플랫폼에서 기수제로 진행하며 콘텐츠를 확보합니다.
+            </p>
+
+            <!-- Process Flow -->
+            <div
+              class="process-flow"
+              role="img"
+              aria-label="콘텐츠 확보 프로세스: Zoom 라이브에서 업로드, 그리고 VOD 자산화로 이어지는 과정"
+            >
+              <div class="process-step">
+                <div class="process-icon" aria-hidden="true">🎥</div>
+                <div class="process-label">Zoom Live</div>
+                <div class="process-desc">멘토링 진행</div>
+              </div>
+              <div class="process-arrow" aria-hidden="true">→</div>
+              <div class="process-step">
+                <div class="process-icon" aria-hidden="true">💾</div>
+                <div class="process-label">Upload</div>
+                <div class="process-desc">최소 편집/아카이빙</div>
+              </div>
+              <div class="process-arrow" aria-hidden="true">→</div>
+              <div class="process-step">
+                <div class="process-icon" aria-hidden="true">💎</div>
+                <div class="process-label">Asset</div>
+                <div class="process-desc">VOD 자산화</div>
+              </div>
+            </div>
+
+            <p
+              style="
+                font-size: 0.9375rem;
+                color: var(--color-gray-700);
+                margin-bottom: var(--space-lg);
+              "
+            >
+              <strong>Paceup 플랫폼 역할 재정의:</strong> 단순 VOD 재생기가 아닌
+              <strong>기수 관리(LMS) 시스템</strong>으로 활용하여 유저 트래픽을
+              플랫폼 내로 집결시킵니다.
+            </p>
+
+            <!-- Warning Alert -->
+            <div class="alert alert-warning" role="alert">
+              <span class="alert-icon" aria-hidden="true">⚠️</span>
+              <div class="alert-content">
+                <div class="alert-title">주의사항</div>
+                <p>
+                  펀딩을 받을 경우 <strong>컨텐츠 사용권한</strong>을 반드시
+                  확인해야 합니다.
+                </p>
+              </div>
+            </div>
+
+            <!-- Roadmap -->
+            <h3
+              style="
+                font-size: 1.125rem;
+                margin: var(--space-xl) 0 var(--space-lg);
+              "
+            >
+              단계별 실행 로드맵
+            </h3>
+
+            <div class="roadmap" role="list" aria-label="실행 로드맵">
+              <div class="roadmap-step active" role="listitem">
+                <div class="step-marker"></div>
+                <span class="step-badge nonprofit">Step 1 — 비영리</span>
+                <h4 class="step-title">The Entry Point</h4>
+                <div class="step-description">
+                  <p>
+                    <strong>Paceup Career Society</strong> 명의로 운영하는 8주
+                    이력서/인터뷰 과정
+                  </p>
+                  <ul>
+                    <li>대상: 취업을 희망하는 이민자 및 청년층 (무료)</li>
+                    <li>내용: 이력서 작성, 링크드인 관리, HR 인터뷰 대비</li>
+                    <li>목표: LMS 데이터 축적 및 회원수 확보</li>
+                  </ul>
+                </div>
+              </div>
+
+              <div class="roadmap-step" role="listitem">
+                <div class="step-marker"></div>
+                <span class="step-badge profit">Step 2 — 영리</span>
+                <h4 class="step-title">The Premium</h4>
+                <div class="step-description">
+                  <p>Step 1 수료자 대상 유료 전환 — 직무별 심화 과정</p>
+                  <ul>
+                    <li>
+                      🎨 디자이너: "디렉터와 함께하는 6주 포트폴리오 완성반"
+                    </li>
+                    <li>
+                      💻 개발자: "시니어 개발자의 코드 리뷰 및 기술 면접 대비반"
+                    </li>
+                    <li>목표: 실질적 매출 및 고수익 창출</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- Section 4: NPO vs Charity Comparison -->
+          <section class="section" aria-labelledby="section4-title">
+            <span class="section-number">Section 04</span>
+            <h2 id="section4-title" class="section-title">
+              일반 비영리(NPO) vs 등록 자선 단체(Charity)
+            </h2>
+            <p class="section-intro">
+              설립 자체는 똑같이 <strong>'비영리 법인'</strong>이지만, 설립 후
+              <strong>CRA(국세청)</strong>에 '자선 단체 등록(Registration)'을
+              하느냐 마느냐의 차이입니다.
+            </p>
+
+            <div class="data-table-wrapper">
+              <table
+                class="data-table"
+                role="table"
+                aria-label="일반 비영리 단체와 등록 자선 단체 비교표"
+              >
+                <thead>
+                  <tr>
+                    <th scope="col" style="width: 18%">비교 항목</th>
+                    <th scope="col" style="width: 41%">
+                      일반 비영리 단체 (NPO)
+                    </th>
+                    <th
+                      scope="col"
+                      class="model-recommended"
+                      style="width: 41%"
+                    >
+                      등록 자선 단체 (Charity)
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th scope="row">정의</th>
+                    <td>
+                      영리를 목적으로 하지 않고, 회원들의 친목이나 공익을 위해
+                      운영되는 단체
+                    </td>
+                    <td class="highlight-cell">
+                      공익(빈곤구제, 교육 등)을 목적으로 하며,
+                      <strong>CRA에 등록</strong>된 단체
+                    </td>
+                  </tr>
+                  <tr>
+                    <th scope="row">설립 난이도</th>
+                    <td class="highlight-cell">
+                      <strong>쉬움</strong> (법인 설립만 하면 끝)
+                    </td>
+                    <td>어려움 (법인 설립 후 CRA 심사 6개월~1년 소요)</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">기부금 영수증</th>
+                    <td>발행 불가 (기부 메리트 낮음)</td>
+                    <td class="highlight-cell">
+                      <strong>발행 가능</strong> (Tax Receipt 발급으로 기부 유치
+                      용이)
+                    </td>
+                  </tr>
+                  <tr>
+                    <th scope="row">정부 펀딩</th>
+                    <td>일부 가능 (문화, 스포츠, 지역 활성화 등)</td>
+                    <td class="highlight-cell">
+                      <strong>매우 유리</strong> (사회복지, 고용지원 등 대형
+                      펀딩 가능)
+                    </td>
+                  </tr>
+                  <tr>
+                    <th scope="row">세금 혜택</th>
+                    <td>소득세 면제 (단, 이익 잉여금 제한)</td>
+                    <td class="highlight-cell">
+                      소득세 면제 + <strong>HST 환급</strong> 혜택이 큼
+                    </td>
+                  </tr>
+                  <tr>
+                    <th scope="row">운영 자율성</th>
+                    <td class="highlight-cell">
+                      <strong>높음</strong> (비교적 자유로운 활동 가능)
+                    </td>
+                    <td>낮음 (정치적 활동 제한, 엄격한 규제)</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">행정 부담</th>
+                    <td class="highlight-cell">
+                      <strong>적음</strong> (T1044 리포트, 소규모는 면제)
+                    </td>
+                    <td>
+                      매우 큼 (매년 T3010 상세 보고 필수, 어기면 등록 취소)
+                    </td>
+                  </tr>
+                  <tr>
+                    <th scope="row">자산 동결</th>
+                    <td>해산 시 정관에 따라 회원 배분 가능 (경우에 따라)</td>
+                    <td>
+                      해산 시 남은 자산은
+                      <strong>반드시 다른 자선 단체에 기부</strong>해야 함
+                    </td>
+                  </tr>
+                  <tr>
+                    <th scope="row">주요 리스크</th>
+                    <td>
+                      영리 활동이 많아지면 '영리 기업'으로 간주되어
+                      <strong>세금 폭탄</strong> 맞을 수 있음
+                    </td>
+                    <td>
+                      규정 위반(예: 영리 기업 부당 지원) 시
+                      <strong>등록 취소 및 자산 몰수</strong>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <!-- Insight Box -->
+            <div class="insight-box" role="region" aria-label="선택 가이드">
+              <h4>어떤 것을 선택해야 할까?</h4>
+              <ul class="insight-list">
+                <li>
+                  <strong>NPO 추천:</strong> 빠르게 시작하고 싶고, 대형
+                  기부금보다는 자체 수익과 소규모 펀딩으로 운영 예정인 경우
+                </li>
+                <li>
+                  <strong>Charity 추천:</strong> 대규모 기부금 모집이 필요하고,
+                  정부 대형 펀딩(고용지원 등)을 노리는 경우
+                </li>
+                <li>
+                  <strong>전략적 접근:</strong> NPO로 시작 후, 트랙 레코드를
+                  쌓고 나중에 Charity로 전환 가능
+                </li>
+              </ul>
+            </div>
+          </section>
+
+          <!-- Section 5: Ontario NPO Incorporation Process -->
+          <section class="section" aria-labelledby="section5-title">
+            <span class="section-number">Section 05</span>
+            <h2 id="section5-title" class="section-title">
+              온타리오 비영리 법인 설립 절차
+            </h2>
+            <p class="section-intro">
+              모든 과정은
+              <strong>Ontario Business Registry (OBR)</strong> 온라인 포털에서
+              진행하는 것이 가장 빠릅니다. 아래 5단계를 따라 법인 설립을 완료할
+              수 있습니다.
+            </p>
+
+            <div class="roadmap" role="list" aria-label="법인 설립 5단계 절차">
+              <!-- Step 1 -->
+              <div class="roadmap-step active" role="listitem">
+                <div class="step-marker"></div>
+                <span class="step-badge nonprofit">1단계</span>
+                <h4 class="step-title">이름 검색 (Nuans Name Search)</h4>
+                <div class="step-description">
+                  <p>
+                    법인으로 사용할 이름(예:
+                    <strong>Paceup Career Society</strong>)이 사용 가능한지
+                    검색합니다.
+                  </p>
+                  <ul>
+                    <li>
+                      <strong>방법:</strong> 민간 검색 업체(Search House)를 통해
+                      <em>'Ontario-biased Nuans Report'</em>를 주문
+                    </li>
+                    <li><strong>비용:</strong> 약 $20 ~ $50</li>
+                    <li>
+                      <strong>유효기간:</strong> 보고서는 90일간 유효.
+                      Reservation Number가 있어야 법인 설립 가능
+                    </li>
+                  </ul>
+                </div>
+              </div>
+
+              <!-- Step 2 -->
+              <div class="roadmap-step" role="listitem">
+                <div class="step-marker"></div>
+                <span class="step-badge nonprofit">2단계</span>
+                <h4 class="step-title">정관(Articles of Incorporation) 작성</h4>
+                <div class="step-description">
+                  <p>법인의 헌법을 작성합니다. (Form 5270)</p>
+
+                  <div
+                    class="alert alert-warning"
+                    role="alert"
+                    style="margin: var(--space-md) 0"
+                  >
+                    <span class="alert-icon" aria-hidden="true">⚠️</span>
+                    <div class="alert-content">
+                      <div class="alert-title">매우 중요</div>
+                      <p>
+                        나중에 <strong>자선 단체(Charity)</strong>로 등록할
+                        가능성이 있다면, 지금 당장은 NPO로 시작하더라도 정관
+                        내용은 <strong>'자선 단체 기준'</strong>으로 작성해야
+                        나중에 정관 수정 비용($130)을 아낍니다.
+                      </p>
+                    </div>
+                  </div>
+
+                  <ul>
+                    <li>
+                      <strong>목적(Purposes):</strong> "교육의 진흥", "빈곤
+                      구제" 등 자선적 목적 사용 (핸드북 부록 C 참고)
+                    </li>
+                    <li>
+                      <strong>특별 조항(Special Provisions):</strong> 이사 보수
+                      금지, 해산 시 자산 기부 등 필수 조항 포함 (핸드북 부록 D
+                      복사)
+                    </li>
+                  </ul>
+                </div>
+              </div>
+
+              <!-- Step 3 -->
+              <div class="roadmap-step" role="listitem">
+                <div class="step-marker"></div>
+                <span class="step-badge profit">3단계</span>
+                <h4 class="step-title">온라인 신청 및 수수료 결제</h4>
+                <div class="step-description">
+                  <p>
+                    OBR 웹사이트에 접속하여 1, 2단계 정보를 입력하고 제출합니다.
+                  </p>
+                  <ul>
+                    <li><strong>비용:</strong> $155 (신용카드 결제)</li>
+                    <li>
+                      <strong>이사 정보:</strong> 최소 3명의 이사(Directors)
+                      이름과 주소 입력 (본인 + 제3자 2명 추천)
+                    </li>
+                    <li>
+                      <strong>결과:</strong> 문제가 없으면 즉시 이메일로
+                      <strong
+                        >법인 설립 증서(Certificate of Incorporation)</strong
+                      >
+                      수령
+                    </li>
+                  </ul>
+                </div>
+              </div>
+
+              <!-- Step 4 -->
+              <div class="roadmap-step" role="listitem">
+                <div class="step-marker"></div>
+                <span class="step-badge profit">4단계</span>
+                <h4 class="step-title">조직 구성 (Organization)</h4>
+                <div class="step-description">
+                  <p>법적으로 법인이 태어났으니, 내부 규칙을 확정합니다.</p>
+                  <ul>
+                    <li>
+                      <strong>정관(By-laws) 채택:</strong> 표준 정관 사용 가능
+                    </li>
+                    <li>
+                      <strong>임원 선출:</strong> President, Secretary 등 선출
+                    </li>
+                    <li>
+                      <strong>은행 계좌 개설:</strong> 법인 설립 증서 필요
+                    </li>
+                  </ul>
+                </div>
+              </div>
+
+              <!-- Step 5 -->
+              <div class="roadmap-step" role="listitem">
+                <div class="step-marker"></div>
+                <span class="step-badge nonprofit">5단계</span>
+                <h4 class="step-title">초기 보고서 (Initial Return) 제출</h4>
+                <div class="step-description">
+                  <p>
+                    법인 설립 후 <strong>60일 이내</strong>에 OBR 사이트에서
+                    제출합니다.
+                  </p>
+                  <ul>
+                    <li>
+                      <strong>내용:</strong> 현재 이사진과 임원진, 본점 주소
+                      등을 정부에 공식 신고
+                    </li>
+                    <li><strong>비용:</strong> 무료</li>
+                    <li>
+                      <strong>주의:</strong> 미제출 시 나중에 법인 취소될 수
+                      있음
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <!-- Cost Summary -->
+            <div class="insight-box" role="region" aria-label="예상 비용 요약">
+              <h4>예상 비용 요약</h4>
+              <ul class="insight-list">
+                <li><strong>Nuans 이름 검색:</strong> $20 ~ $50</li>
+                <li><strong>법인 설립 수수료:</strong> $155</li>
+                <li><strong>초기 보고서:</strong> 무료</li>
+                <li><strong>총 예상 비용:</strong> 약 $175 ~ $205</li>
+              </ul>
+            </div>
+          </section>
+        </div>
+      </main>
+
+      <!-- Footer -->
+      <footer class="report-footer" role="contentinfo">
+        <div class="container">
+          <div class="footer-content">
+            <div class="footer-brand">Pacemaker Inc.</div>
+            <p class="footer-legal">
+              © 2025 Pacemaker Inc. All Rights Reserved. | Confidential
+              Strategic Document
+            </p>
+          </div>
+        </div>
+      </footer>
+    </div>
+  </body>
+</html>
