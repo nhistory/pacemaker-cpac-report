@@ -1,0 +1,1576 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Pacemaker 전략 보고서 - January 02, 2026"
+    />
+    <title>비영리단체 설립 및 OTF 펀딩 실행 가이드 | Pacemaker</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;600;700&family=Noto+Sans+KR:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      :root {
+        --color-primary: #051c2c;
+        --color-secondary: #0f4c81;
+        --color-accent: #00a3e0;
+        --color-white: #ffffff;
+        --color-gray-50: #f8f9fa;
+        --color-gray-100: #f1f3f5;
+        --color-gray-200: #e9ecef;
+        --color-gray-300: #dee2e6;
+        --color-gray-600: #6c757d;
+        --color-gray-700: #495057;
+        --color-gray-800: #343a40;
+        --color-gray-900: #212529;
+        --color-success: #198754;
+        --color-warning: #ffc107;
+        --color-warning-bg: #fff3cd;
+        --color-danger: #dc3545;
+        --font-serif: "Noto Serif KR", Georgia, serif;
+        --font-sans: "Noto Sans KR", -apple-system, sans-serif;
+        --space-xs: 0.25rem;
+        --space-sm: 0.5rem;
+        --space-md: 1rem;
+        --space-lg: 1.5rem;
+        --space-xl: 2rem;
+        --space-2xl: 3rem;
+        --space-3xl: 4rem;
+        --radius-sm: 4px;
+        --radius-md: 8px;
+        --radius-lg: 12px;
+        --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+        --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.07);
+      }
+
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      html {
+        font-size: 16px;
+        scroll-behavior: smooth;
+      }
+
+      body {
+        font-family: var(--font-sans);
+        line-height: 1.7;
+        color: var(--color-gray-800);
+        background-color: var(--color-gray-50);
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .container {
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 0 var(--space-lg);
+      }
+
+      /* Header */
+      .header {
+        background: linear-gradient(
+          135deg,
+          var(--color-primary) 0%,
+          var(--color-secondary) 100%
+        );
+        color: var(--color-white);
+        padding: var(--space-3xl) var(--space-xl);
+        text-align: center;
+      }
+
+      .back-link {
+        display: inline-flex;
+        align-items: center;
+        gap: var(--space-sm);
+        color: var(--color-accent);
+        text-decoration: none;
+        font-size: 0.875rem;
+        margin-bottom: var(--space-lg);
+      }
+
+      .back-link::before {
+        content: "←";
+      }
+
+      .report-date {
+        font-size: 0.75rem;
+        font-weight: 600;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        color: var(--color-accent);
+        margin-bottom: var(--space-md);
+      }
+
+      .header-title {
+        font-family: var(--font-serif);
+        font-size: clamp(1.75rem, 4vw, 2.5rem);
+        font-weight: 700;
+        margin-bottom: var(--space-md);
+      }
+
+      .header-subtitle {
+        font-size: 1.125rem;
+        color: rgba(255, 255, 255, 0.85);
+        max-width: 600px;
+        margin: 0 auto;
+      }
+
+      /* Main Content */
+      main {
+        flex: 1;
+        padding: var(--space-3xl) 0;
+      }
+
+      /* Section */
+      .section {
+        background: var(--color-white);
+        border-radius: var(--radius-lg);
+        box-shadow: var(--shadow-md);
+        padding: var(--space-xl);
+        margin-bottom: var(--space-xl);
+      }
+
+      .section-number {
+        font-family: var(--font-serif);
+        font-size: 0.875rem;
+        font-weight: 700;
+        color: var(--color-accent);
+        margin-bottom: var(--space-sm);
+      }
+
+      .section-title {
+        font-family: var(--font-serif);
+        font-size: 1.5rem;
+        color: var(--color-primary);
+        margin-bottom: var(--space-lg);
+        padding-bottom: var(--space-md);
+        border-bottom: 2px solid var(--color-gray-200);
+      }
+
+      .section-intro {
+        color: var(--color-gray-700);
+        margin-bottom: var(--space-lg);
+      }
+
+      /* Organization Info */
+      .org-card {
+        background: var(--color-gray-50);
+        border-radius: var(--radius-md);
+        padding: var(--space-lg);
+        margin-bottom: var(--space-lg);
+        border-left: 4px solid var(--color-secondary);
+      }
+
+      .org-name {
+        font-family: var(--font-serif);
+        font-size: 1.25rem;
+        font-weight: 600;
+        color: var(--color-primary);
+        margin-bottom: var(--space-sm);
+      }
+
+      /* Code Block */
+      .code-block {
+        background-color: var(--color-gray-900);
+        color: #e9ecef;
+        padding: var(--space-md);
+        border-radius: var(--radius-md);
+        font-family: "SF Mono", Consolas, monospace;
+        font-size: 0.8125rem;
+        line-height: 1.6;
+        overflow-x: auto;
+        margin: var(--space-md) 0;
+        white-space: pre-wrap;
+        word-break: break-word;
+      }
+
+      .code-block .comment {
+        color: #6c757d;
+      }
+
+      /* Subsection */
+      .subsection {
+        margin-top: var(--space-xl);
+      }
+
+      .subsection-title {
+        font-family: var(--font-serif);
+        font-size: 1.125rem;
+        font-weight: 600;
+        color: var(--color-secondary);
+        margin-bottom: var(--space-md);
+        display: flex;
+        align-items: center;
+        gap: var(--space-sm);
+      }
+
+      .subsection-title::before {
+        content: "";
+        width: 4px;
+        height: 1.125rem;
+        background: var(--color-accent);
+        border-radius: 2px;
+      }
+
+      /* Info Card */
+      .info-card {
+        background: var(--color-gray-50);
+        border-radius: var(--radius-md);
+        padding: var(--space-lg);
+        margin: var(--space-md) 0;
+        border-left: 4px solid var(--color-accent);
+      }
+
+      .info-card h4 {
+        font-size: 0.9375rem;
+        font-weight: 600;
+        color: var(--color-primary);
+        margin-bottom: var(--space-sm);
+      }
+
+      .info-card p {
+        font-size: 0.875rem;
+        color: var(--color-gray-700);
+        margin: 0;
+      }
+
+      /* Key Strategy Box */
+      .key-strategy {
+        background: linear-gradient(
+          135deg,
+          var(--color-primary) 0%,
+          var(--color-secondary) 100%
+        );
+        color: white;
+        padding: var(--space-lg);
+        border-radius: var(--radius-md);
+        margin: var(--space-lg) 0;
+      }
+
+      .key-strategy h4 {
+        color: var(--color-accent);
+        font-size: 0.75rem;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        margin-bottom: var(--space-sm);
+      }
+
+      .key-strategy p {
+        margin: 0;
+        line-height: 1.6;
+      }
+
+      /* Warning Box */
+      .warning-box {
+        background: var(--color-warning-bg);
+        border-left: 4px solid var(--color-warning);
+        padding: var(--space-md);
+        border-radius: var(--radius-sm);
+        margin: var(--space-md) 0;
+      }
+
+      .warning-box p {
+        margin: 0;
+        font-size: 0.875rem;
+        color: #856404;
+      }
+
+      /* Checklist */
+      .checklist {
+        list-style: none;
+        padding: 0;
+        margin: var(--space-md) 0;
+      }
+
+      .checklist li {
+        padding: var(--space-sm) 0;
+        padding-left: var(--space-xl);
+        position: relative;
+        font-size: 0.9375rem;
+        color: var(--color-gray-700);
+        border-bottom: 1px dashed var(--color-gray-200);
+      }
+
+      .checklist li:last-child {
+        border-bottom: none;
+      }
+
+      .checklist li::before {
+        content: "☐";
+        position: absolute;
+        left: 0;
+        color: var(--color-secondary);
+        font-size: 1rem;
+      }
+
+      /* Finance Table */
+      .finance-table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 0.875rem;
+        margin: var(--space-md) 0;
+      }
+
+      .finance-table th {
+        background-color: var(--color-primary);
+        color: white;
+        padding: var(--space-md);
+        text-align: left;
+        font-weight: 600;
+      }
+
+      .finance-table td {
+        padding: var(--space-md);
+        border-bottom: 1px solid var(--color-gray-200);
+        vertical-align: top;
+      }
+
+      .finance-table tr:nth-child(even) td {
+        background-color: var(--color-gray-50);
+      }
+
+      .finance-table .amount {
+        font-family: "SF Mono", Consolas, monospace;
+        font-weight: 600;
+        color: var(--color-secondary);
+      }
+
+      .finance-table .percent {
+        color: var(--color-gray-600);
+        font-size: 0.75rem;
+      }
+
+      /* Timeline */
+      .timeline {
+        position: relative;
+        padding-left: var(--space-xl);
+        margin: var(--space-lg) 0;
+      }
+
+      .timeline::before {
+        content: "";
+        position: absolute;
+        left: 11px;
+        top: 0;
+        bottom: 0;
+        width: 2px;
+        background: linear-gradient(
+          to bottom,
+          var(--color-primary) 0%,
+          var(--color-accent) 100%
+        );
+      }
+
+      .timeline-item {
+        position: relative;
+        padding-bottom: var(--space-xl);
+      }
+
+      .timeline-dot {
+        position: absolute;
+        left: calc(-1 * var(--space-xl) + 4px);
+        width: 16px;
+        height: 16px;
+        background-color: var(--color-primary);
+        border: 3px solid var(--color-primary);
+        border-radius: 50%;
+      }
+
+      .timeline-item:nth-child(2) .timeline-dot {
+        background-color: white;
+        border-color: var(--color-secondary);
+      }
+
+      .timeline-item:nth-child(3) .timeline-dot {
+        background-color: white;
+        border-color: var(--color-accent);
+      }
+
+      .timeline-item:nth-child(4) .timeline-dot {
+        background-color: white;
+        border-color: var(--color-success);
+      }
+
+      .timeline-label {
+        display: inline-block;
+        padding: var(--space-xs) var(--space-sm);
+        border-radius: var(--radius-sm);
+        font-size: 0.6875rem;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        margin-bottom: var(--space-sm);
+        background-color: var(--color-primary);
+        color: white;
+      }
+
+      .timeline-item:nth-child(2) .timeline-label {
+        background-color: var(--color-secondary);
+      }
+
+      .timeline-item:nth-child(3) .timeline-label {
+        background-color: var(--color-accent);
+      }
+
+      .timeline-item:nth-child(4) .timeline-label {
+        background-color: var(--color-success);
+      }
+
+      .timeline-title {
+        font-family: var(--font-serif);
+        font-size: 1.125rem;
+        font-weight: 600;
+        margin-bottom: var(--space-sm);
+        color: var(--color-primary);
+      }
+
+      .timeline-content {
+        font-size: 0.9375rem;
+        color: var(--color-gray-700);
+        line-height: 1.7;
+      }
+
+      /* Summary Grid */
+      .summary-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        gap: var(--space-md);
+        margin: var(--space-lg) 0;
+      }
+
+      .summary-card {
+        background: var(--color-white);
+        border: 1px solid var(--color-gray-200);
+        border-radius: var(--radius-md);
+        padding: var(--space-md);
+        text-align: center;
+      }
+
+      .summary-card.highlight {
+        border-top: 3px solid var(--color-accent);
+      }
+
+      .summary-label {
+        font-size: 0.75rem;
+        color: var(--color-gray-600);
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        margin-bottom: var(--space-xs);
+      }
+
+      .summary-value {
+        font-family: var(--font-serif);
+        font-size: 1.25rem;
+        font-weight: 700;
+        color: var(--color-primary);
+      }
+
+      /* Link Style */
+      .external-link {
+        color: var(--color-accent);
+        text-decoration: none;
+        font-weight: 500;
+      }
+
+      .external-link:hover {
+        text-decoration: underline;
+      }
+
+      /* Footer */
+      .footer {
+        background-color: var(--color-gray-900);
+        color: var(--color-white);
+        padding: var(--space-xl);
+        text-align: center;
+        margin-top: auto;
+      }
+
+      .footer p {
+        font-size: 0.875rem;
+        opacity: 0.7;
+      }
+
+      @media (max-width: 640px) {
+        .header {
+          padding: var(--space-2xl) var(--space-lg);
+        }
+        .section {
+          padding: var(--space-lg);
+        }
+        .summary-grid {
+          grid-template-columns: 1fr 1fr;
+        }
+        .finance-table {
+          font-size: 0.75rem;
+        }
+        .finance-table th,
+        .finance-table td {
+          padding: var(--space-sm);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="header">
+      <a href="../" class="back-link">보고서 목록으로 돌아가기</a>
+      <p class="report-date">January 02, 2026</p>
+      <h1 class="header-title">비영리단체 설립 및 OTF 펀딩 실행 가이드</h1>
+      <p class="header-subtitle">
+        정관 작성, Seed Grant 공략, 설립~신청 액션 플랜
+      </p>
+    </header>
+
+    <main>
+      <div class="container">
+        <!-- Section 01: 캐나다 비영리단체 설립 및 펀딩 최적화 정관 가이드 -->
+        <section class="section">
+          <span class="section-number">Section 01</span>
+          <h2 class="section-title">
+            캐나다 비영리단체 설립 및 펀딩 최적화 정관 가이드
+          </h2>
+
+          <div class="key-strategy">
+            <h4>💡 핵심 전략</h4>
+            <p>
+              초기부터
+              <strong style="color: var(--color-accent)"
+                >'자선단체(Charity)' 등록이 가능한 수준의 정관</strong
+              >을 갖추어, 온타리오 트릴리움 재단(OTF) 및 연방 정부 펀딩 심사
+              통과 확률을 극대화함.
+            </p>
+          </div>
+
+          <!-- A. 설립 목적 -->
+          <div class="subsection">
+            <h3 class="subsection-title">A. 설립 목적 (Purposes)</h3>
+            <p class="section-intro">
+              정부 펀딩을 위해 단순 취업 알선이 아닌 <strong>'교육'</strong>과
+              <strong>'빈곤 구제'</strong> 목적을 명시해야 함.
+            </p>
+
+            <div class="info-card">
+              <h4>📚 교육 증진 (Advancement of Education)</h4>
+              <div class="code-block">
+                "To advance education by providing career counseling, job search
+                training, workshops, and mentorship programs to immigrants,
+                youth, and individuals in need of assistance."
+              </div>
+            </div>
+
+            <div class="info-card">
+              <h4>🤝 빈곤 구제 (Relief of Poverty)</h4>
+              <div class="code-block">
+                "To relieve poverty by providing employment support services and
+                resources to unemployed or low-income individuals to help them
+                secure sustainable employment."
+              </div>
+            </div>
+          </div>
+
+          <!-- B. 특별 조항 -->
+          <div class="subsection">
+            <h3 class="subsection-title">B. 특별 조항 (Special Provisions)</h3>
+            <p class="section-intro">
+              CRA(국세청) 자선단체 등록 요건을 충족하기 위한
+              <strong>3대 필수 조항</strong>.
+            </p>
+
+            <div
+              class="info-card"
+              style="border-left-color: var(--color-danger)"
+            >
+              <h4>🚫 이익 분배 금지 (Non-Profit Clause)</h4>
+              <div class="code-block">
+                "The corporation shall be carried on without the purpose of gain
+                for its members, and any profits or other accretions to the
+                corporation shall be used in promoting its purposes."
+              </div>
+            </div>
+
+            <div
+              class="info-card"
+              style="border-left-color: var(--color-success)"
+            >
+              <h4>⭐ 해산 시 자산 기부 (Dissolution Clause) - 핵심</h4>
+              <div class="code-block">
+                "Upon the dissolution of the corporation and after payment of
+                all debts and liabilities, its remaining property shall be
+                distributed or disposed of to one or more qualified donees
+                within the meaning of the Income Tax Act (Canada)."
+              </div>
+            </div>
+
+            <div
+              class="info-card"
+              style="border-left-color: var(--color-secondary)"
+            >
+              <h4>💼 이사 무보수 (Remuneration of Directors)</h4>
+              <div class="code-block">
+                "The directors shall serve as such without remuneration and no
+                director shall directly or indirectly receive any profit from
+                his or her position as such; provided that a director may be
+                paid reasonable expenses incurred by him or her in the
+                performance of his or her duties."
+              </div>
+            </div>
+          </div>
+
+          <!-- C. Classes of Members -->
+          <div class="subsection">
+            <h3 class="subsection-title">C. 회원 등급 (Classes of Members)</h3>
+            <p class="section-intro">
+              Ontario Business Registry 신청(Form 5270) 중 'Classes of Members'
+              섹션에 아래 내용을 그대로 복사해서 입력하세요.
+            </p>
+
+            <div
+              class="org-card"
+              style="border-left-color: var(--color-success)"
+            >
+              <h3 class="org-name">Class A: Voting Members (설립자 그룹)</h3>
+              <p
+                style="
+                  font-size: 0.875rem;
+                  color: var(--color-gray-600);
+                  margin-bottom: var(--space-md);
+                "
+              >
+                <strong>대상:</strong> Project Lead (대표), Technical Lead (CTO)
+                등 설립자 그룹만 해당<br />
+                <strong>권한:</strong> 모든 의결권 독점 (이사진 해임권 포함)
+              </p>
+              <div class="code-block">
+                "Class A members shall be entitled to receive notice of and to
+                attend all meetings of the members and shall have one vote at
+                each such meeting."
+              </div>
+            </div>
+
+            <div
+              class="org-card"
+              style="border-left-color: var(--color-gray-600)"
+            >
+              <h3 class="org-name">Class B: Non-voting Members (기타 그룹)</h3>
+              <p
+                style="
+                  font-size: 0.875rem;
+                  color: var(--color-gray-600);
+                  margin-bottom: var(--space-md);
+                "
+              >
+                <strong>대상:</strong> 외부 이사(Directors) 또는 일반 후원자<br />
+                <strong>권한:</strong> 회의 참석은 가능하나, 결정권(투표권)은
+                없음
+              </p>
+              <div class="code-block">
+                "Class B members shall be entitled to receive notice of and to
+                attend meetings of the members but shall not be entitled to vote
+                at any such meeting."
+              </div>
+            </div>
+          </div>
+
+          <!-- D. 비상시 작동 매뉴얼 -->
+          <div class="subsection">
+            <h3 class="subsection-title">
+              D. 비상시 작동 매뉴얼 (Emergency Protocol)
+            </h3>
+            <p class="section-intro">
+              만약 이사회(제3자 3명 이상)가 대표(창업자)를 해고하려 하거나
+              조직을 탈취하려 할 때:
+            </p>
+
+            <div
+              class="warning-box"
+              style="
+                background: linear-gradient(135deg, #fff5f5 0%, #ffe5e5 100%);
+                border-left-color: var(--color-danger);
+              "
+            >
+              <p
+                style="
+                  color: var(--color-danger);
+                  font-weight: 600;
+                  margin-bottom: var(--space-sm);
+                "
+              >
+                🚨 비상 프로토콜
+              </p>
+              <ol
+                style="
+                  margin: 0;
+                  padding-left: var(--space-lg);
+                  font-size: 0.875rem;
+                  color: var(--color-gray-700);
+                "
+              >
+                <li style="margin-bottom: var(--space-xs)">
+                  <strong>특별 총회 소집:</strong> Class A 회원(대표) 권한으로
+                  'Special Meeting of Members' 소집 통보
+                </li>
+                <li style="margin-bottom: var(--space-xs)">
+                  <strong>안건 상정:</strong> "현 이사진 전원 해임 및 신규 이사
+                  선임의 건"
+                </li>
+                <li style="margin-bottom: var(--space-xs)">
+                  <strong>의결:</strong> Class A 회원(설립자 그룹) 만장일치로
+                  즉시 가결
+                </li>
+                <li>
+                  <strong>결과:</strong> 기존 이사 즉시 해고 및 조직 통제권 회복
+                </li>
+              </ol>
+            </div>
+          </div>
+
+          <!-- 이사진 구성 전략 -->
+          <div class="subsection">
+            <h3 class="subsection-title">이사진 (Directors) 구성 전략</h3>
+            <div
+              style="
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+                gap: var(--space-md);
+              "
+            >
+              <div class="info-card">
+                <h4>최소 인원</h4>
+                <p><strong>3명</strong> (권장 5명 이상)</p>
+              </div>
+              <div class="info-card">
+                <h4>초기 구성</h4>
+                <p>ED(대표) + CTO + 외부 인사 1명 (필수)</p>
+              </div>
+              <div
+                class="info-card"
+                style="border-left-color: var(--color-warning)"
+              >
+                <h4>⚠️ 주의</h4>
+                <p>
+                  외부 인사는 영리 법인의 임원이 아니어야 이해상충 문제를 피할
+                  수 있음
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- 실행 체크리스트 -->
+          <div class="subsection">
+            <h3 class="subsection-title">실행 체크리스트</h3>
+            <ul class="checklist">
+              <li>Ontario Business Registry 접속 및 로그인</li>
+              <li>Nuans Name Search (이름 검색)</li>
+              <li>Incorporate a Not-for-Profit 선택 후 위 내용 입력</li>
+              <li>설립 완료 후 60일 이내 Initial Return 제출 (필수)</li>
+            </ul>
+          </div>
+        </section>
+
+        <!-- Section 02: OTF Seed Grant 공략 및 실행 매뉴얼 -->
+        <section class="section">
+          <span class="section-number">Section 02</span>
+          <h2 class="section-title">OTF Seed Grant 공략 및 실행 매뉴얼</h2>
+
+          <p class="section-intro">
+            <strong>목표:</strong> 2026년 하반기 운영 자금($62,500) 확보 및
+            Pacemaker 공식 런칭<br />
+            <strong>타겟 펀딩:</strong> Ontario Trillium Foundation (OTF) - Seed
+            Grant<br />
+            <strong>핵심 전략:</strong> "The Double Loop" (1년간 2회의 파일럿
+            반복을 통한 검증 및 고도화)<br />
+            <a
+              href="https://otf.ca/our-grants/community-investments-grants/seed-grant"
+              class="external-link"
+              target="_blank"
+              >🔗 OTF Seed Grant 바로가기</a
+            >
+          </p>
+
+          <!-- 펀딩 개요 -->
+          <div class="summary-grid">
+            <div class="summary-card highlight">
+              <div class="summary-label">펀딩명</div>
+              <div class="summary-value" style="font-size: 1rem">
+                OTF Seed Grant
+              </div>
+            </div>
+            <div class="summary-card highlight">
+              <div class="summary-label">요청 금액</div>
+              <div class="summary-value">$62,500</div>
+            </div>
+            <div class="summary-card highlight">
+              <div class="summary-label">프로젝트 기간</div>
+              <div class="summary-value">12개월</div>
+            </div>
+            <div class="summary-card highlight">
+              <div class="summary-label">Action Area</div>
+              <div class="summary-value" style="font-size: 0.9rem">
+                Economically Free
+              </div>
+            </div>
+          </div>
+
+          <div class="org-card">
+            <h3 class="org-name">Pacemaker AI-Native Residency Program</h3>
+            <p style="font-size: 0.875rem; color: var(--color-gray-600)">
+              <strong>신청 유형:</strong> New Program Pilot (신규 프로그램
+              파일럿)<br />
+              <strong>목표 결과:</strong> People have the skills and knowledge
+              to achieve greater financial independence.
+            </p>
+          </div>
+
+          <!-- 프로그램 컨셉 -->
+          <div class="subsection">
+            <h3 class="subsection-title">
+              프로그램 컨셉: "AI-Native Residency"
+            </h3>
+
+            <div class="key-strategy">
+              <h4>🎯 솔루션</h4>
+              <p>
+                "단순 교육이 아니라,
+                <strong style="color: var(--color-accent)"
+                  >경력직 같은 신입</strong
+                >을 만드는 가상 인턴십"
+              </p>
+            </div>
+
+            <div
+              style="
+                display: grid;
+                gap: var(--space-md);
+                margin-top: var(--space-lg);
+              "
+            >
+              <div class="info-card">
+                <h4>🤖 AI-Pair Programming</h4>
+                <p>
+                  AI 도구(Cursor, Copilot 등)를 활용해 3년 차 수준의 생산성을
+                  내는 훈련
+                </p>
+              </div>
+              <div class="info-card">
+                <h4>🏢 Real-World Simulation</h4>
+                <p>
+                  가상의 회사(Pacemaker Labs) 환경에서 티켓 처리, 애자일 미팅 등
+                  실무 프로세스 경험
+                </p>
+              </div>
+              <div class="info-card">
+                <h4>👨‍💼 Director-Level Review</h4>
+                <p>현직 디렉터급 멘토의 냉정한 코드 리뷰/디자인 크리틱 제공</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- 실행 로드맵 -->
+          <div class="subsection">
+            <h3 class="subsection-title">
+              실행 로드맵: "The Double Loop Strategy"
+            </h3>
+            <p class="section-intro">
+              "왜 1년이 필요한가?" → <strong>2번의 반복 실행</strong>을 통해
+              프로그램을 완성하기 때문.
+            </p>
+
+            <div class="timeline">
+              <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-label">Q1 (1~3개월)</div>
+                <h4 class="timeline-title">기획 및 인프라 구축 (Build)</h4>
+                <div class="timeline-content">
+                  <p>
+                    <strong>활동:</strong> 가상 회사(LMS, Slack, Jira) 환경
+                    세팅, 1기(Beta) 선발 인터뷰
+                  </p>
+                  <p>
+                    <strong>ED/CTO 역할:</strong> 상세 커리큘럼 개발, 멘토진
+                    온보딩, 파트너 기업 섭외
+                  </p>
+                </div>
+              </div>
+
+              <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-label">Q2 (4~5개월)</div>
+                <h4 class="timeline-title">1기 운영 - Beta Cohort (Run 1)</h4>
+                <div class="timeline-content">
+                  <p>
+                    <strong>기간:</strong> 8주 집중 과정 |
+                    <strong>대상:</strong> 10명 (소수 정예)
+                  </p>
+                  <p>
+                    <strong>목표:</strong> 커리큘럼의 결함(Bug) 발견 및 초기
+                    성공 사례(취업) 1건 이상 만들기
+                  </p>
+                </div>
+              </div>
+
+              <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-label">Q3 (6~8개월)</div>
+                <h4 class="timeline-title">개선 및 고도화 (Refine)</h4>
+                <div class="timeline-content">
+                  <p>
+                    <strong>활동:</strong> 1기 데이터 분석, 커리큘럼 전면
+                    개편(Pivot), 2기 확장 모집 마케팅
+                  </p>
+                  <p>
+                    <strong>ED/CTO 역할:</strong> 1기 수료생 취업 알선, 2기용
+                    심화 교재 제작 (1기 피드백 반영)
+                  </p>
+                </div>
+              </div>
+
+              <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-label">Q4 (9~10개월)</div>
+                <h4 class="timeline-title">
+                  2기 운영 - Official Cohort (Run 2)
+                </h4>
+                <div class="timeline-content">
+                  <p>
+                    <strong>기간:</strong> 8주 집중 과정 |
+                    <strong>대상:</strong> 15~20명 (규모 확대)
+                  </p>
+                  <p>
+                    <strong>목표:</strong> 개선된 모델의 성과 입증, 데모
+                    데이(Demo Day) 개최
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div
+              class="info-card"
+              style="border-left-color: var(--color-success)"
+            >
+              <h4>📊 Wrap-up (11~12개월): 결과 보고</h4>
+              <p>최종 성과 지표(KPI) 산출, Grow Grant(확장 펀딩) 신청 준비</p>
+            </div>
+          </div>
+
+          <!-- 재무 및 법적 준비 -->
+          <div class="subsection">
+            <h3 class="subsection-title">
+              재무 및 법적 준비 (Financial & Legal Prep)
+            </h3>
+
+            <div
+              class="org-card"
+              style="border-left-color: var(--color-success)"
+            >
+              <h3 class="org-name">A. 법인 계좌 및 초기 자금</h3>
+              <ul
+                style="
+                  margin: var(--space-md) 0 0 0;
+                  padding-left: var(--space-lg);
+                  font-size: 0.9375rem;
+                  color: var(--color-gray-700);
+                "
+              >
+                <li>
+                  <strong>계좌:</strong> 시중 은행 'Community Plan' (비영리
+                  우대) 개설
+                </li>
+                <li>
+                  <strong>입금:</strong> $1,000 CAD (필수) -
+                  <strong>명목:</strong> Director's Loan (이사의 가수금) - 추후
+                  세금 없이 인출 가능
+                </li>
+                <li>
+                  <strong>재무제표:</strong> 개시 대차대조표(Opening Balance
+                  Sheet)에 자산 $1,000 / 부채 $1,000 표기
+                </li>
+              </ul>
+            </div>
+
+            <div
+              class="org-card"
+              style="border-left-color: var(--color-secondary)"
+            >
+              <h3 class="org-name">B. 이사회 (Governance) 구성</h3>
+              <ul
+                style="
+                  margin: var(--space-md) 0 0 0;
+                  padding-left: var(--space-lg);
+                  font-size: 0.9375rem;
+                  color: var(--color-gray-700);
+                "
+              >
+                <li>
+                  <strong>구성:</strong> 대표(ED) 제외 제3자 3명 등기 (필수)
+                </li>
+                <li>
+                  <strong>전략:</strong> 펀딩 수령을 위해 대표와 CTO는 법적
+                  이사직에서 사임하고 'Project Staff'로 계약
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- 예산 운용 전략 -->
+          <div class="subsection">
+            <h3 class="subsection-title">예산 운용 전략 (Budget Breakdown)</h3>
+            <p class="section-intro">
+              <strong>총 신청 예산: $62,500 CAD</strong>
+            </p>
+
+            <div
+              style="
+                overflow-x: auto;
+                border-radius: var(--radius-md);
+                border: 1px solid var(--color-gray-200);
+              "
+            >
+              <table class="finance-table">
+                <thead>
+                  <tr>
+                    <th>항목</th>
+                    <th>세부 내역</th>
+                    <th style="text-align: right">금액</th>
+                    <th style="text-align: right">비율</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td rowspan="2"><strong>💼 인건비 (Personnel)</strong></td>
+                    <td>Project Lead (대표): 주 20시간 x 12개월</td>
+                    <td style="text-align: right" class="amount">$24,000</td>
+                    <td
+                      rowspan="2"
+                      style="text-align: right; vertical-align: middle"
+                      class="percent"
+                    >
+                      64%
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Technical Lead (CTO): 주 15시간 x 12개월</td>
+                    <td style="text-align: right" class="amount">$16,000</td>
+                  </tr>
+                  <tr style="background-color: var(--color-gray-100)">
+                    <td colspan="2" style="text-align: right">
+                      <strong>인건비 소계</strong>
+                    </td>
+                    <td style="text-align: right" class="amount">
+                      <strong>$40,000</strong>
+                    </td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td rowspan="4"><strong>📦 프로그램 운영비</strong></td>
+                    <td>Guest Instructors (Honoraria): $300 x 20회</td>
+                    <td style="text-align: right" class="amount">$6,000</td>
+                    <td
+                      rowspan="5"
+                      style="text-align: right; vertical-align: middle"
+                      class="percent"
+                    >
+                      20%
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Venue Rental (오프라인 밋업 대관료)</td>
+                    <td style="text-align: right" class="amount">$2,500</td>
+                  </tr>
+                  <tr>
+                    <td>Software & Tools (AI 툴 유료 구독 등)</td>
+                    <td style="text-align: right" class="amount">$2,500</td>
+                  </tr>
+                  <tr>
+                    <td>Materials (교재 및 다과)</td>
+                    <td style="text-align: right" class="amount">$1,500</td>
+                  </tr>
+                  <tr style="background-color: var(--color-gray-100)">
+                    <td colspan="2" style="text-align: right">
+                      <strong>프로그램 운영비 소계</strong>
+                    </td>
+                    <td style="text-align: right" class="amount">
+                      <strong>$12,500</strong>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td rowspan="2"><strong>📣 홍보비</strong></td>
+                    <td>Digital Marketing (2기 모집 집중 광고)</td>
+                    <td style="text-align: right" class="amount">$2,500</td>
+                    <td
+                      rowspan="3"
+                      style="text-align: right; vertical-align: middle"
+                      class="percent"
+                    >
+                      5.6%
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Content Production (홍보 영상 제작)</td>
+                    <td style="text-align: right" class="amount">$1,000</td>
+                  </tr>
+                  <tr style="background-color: var(--color-gray-100)">
+                    <td colspan="2" style="text-align: right">
+                      <strong>홍보비 소계</strong>
+                    </td>
+                    <td style="text-align: right" class="amount">
+                      <strong>$3,500</strong>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td rowspan="3"><strong>🏢 행정비</strong></td>
+                    <td>Insurance (배상책임보험)</td>
+                    <td style="text-align: right" class="amount">$1,500</td>
+                    <td
+                      rowspan="4"
+                      style="text-align: right; vertical-align: middle"
+                      class="percent"
+                    >
+                      10.4%
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Professional Services (회계 기장)</td>
+                    <td style="text-align: right" class="amount">$3,000</td>
+                  </tr>
+                  <tr>
+                    <td>Bank/Misc</td>
+                    <td style="text-align: right" class="amount">$2,000</td>
+                  </tr>
+                  <tr style="background-color: var(--color-gray-100)">
+                    <td colspan="2" style="text-align: right">
+                      <strong>행정비 소계</strong>
+                    </td>
+                    <td style="text-align: right" class="amount">
+                      <strong>$6,500</strong>
+                    </td>
+                  </tr>
+                  <tr
+                    style="
+                      background: linear-gradient(
+                        135deg,
+                        var(--color-primary),
+                        var(--color-secondary)
+                      );
+                      color: white;
+                    "
+                  >
+                    <td colspan="2" style="text-align: right; font-weight: 700">
+                      총계
+                    </td>
+                    <td
+                      style="
+                        text-align: right;
+                        font-weight: 700;
+                        font-size: 1.125rem;
+                      "
+                    >
+                      $62,500
+                    </td>
+                    <td style="text-align: right; font-weight: 700">100%</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- 필수 체크리스트 -->
+          <div class="subsection">
+            <h3 class="subsection-title">필수 체크리스트 (Before Applying)</h3>
+            <ul class="checklist">
+              <li>
+                <strong>정관 (Letters Patent):</strong> '해산 시 자산 기부 조항'
+                및 '교육/빈곤구제' 목적 포함
+              </li>
+              <li>
+                <strong>이사진 (Board):</strong> 비특수관계인(가족X) 3명 확보
+                완료
+              </li>
+              <li>
+                <strong>증거 데이터 (Evidence):</strong> 상반기에 자체적으로
+                진행한 소규모 워크숍 사진 및 설문 결과 확보
+              </li>
+              <li>
+                <strong>타겟 정의:</strong> 신청서에 "PR 소지자뿐만 아니라 PGWP,
+                Open Work Permit 소지자 등 제도적 사각지대에 있는 인재를
+                포함한다"고 명시
+              </li>
+            </ul>
+          </div>
+        </section>
+
+        <!-- Section 03: 실행 액션 플랜 -->
+        <section class="section">
+          <span class="section-number">Section 03</span>
+          <h2 class="section-title">
+            실행 액션 플랜: 설립부터 신청 전까지 (Jan ~ Jul 2026)
+          </h2>
+
+          <p class="section-intro">
+            <strong>목표:</strong> 단순한 법인 설립을 넘어, 8월 펀딩 신청 시
+            <strong>"이미 준비된 단체"</strong>임을 증명하기 위한 행정적/실무적
+            빌드업 과정.
+          </p>
+
+          <!-- 1. 첫 이사회 개최 -->
+          <div
+            class="org-card"
+            style="
+              border-left-color: var(--color-primary);
+              margin-top: var(--space-xl);
+            "
+          >
+            <h3 class="org-name">
+              1. 첫 이사회 (Inaugural Board Meeting) 개최 및 의결 (1월 중)
+            </h3>
+            <p style="font-size: 0.875rem; color: var(--color-gray-600)">
+              법인 설립 직후, 제3자 이사 3명과 함께 첫 회의를 열고 반드시 아래
+              안건들을 <strong>'서면 의사록(Minutes)'</strong>으로 남겨야
+              합니다. (펀딩 감사 대비용)
+            </p>
+          </div>
+
+          <ul class="checklist">
+            <li>
+              <strong>By-laws(정관) 채택:</strong> 법인 설립 시 제출한 내용을
+              내부 규정으로 공식 승인
+            </li>
+            <li>
+              <strong>임원 선출:</strong> President(이사장), Secretary(서기),
+              Treasurer(재무) 선출
+            </li>
+            <li>
+              <strong>은행 거래 승인:</strong> 법인 계좌 개설 및 서명
+              권한자(Signing Officer) 지정 (보통 실무자인 ED에게 권한 위임)
+            </li>
+          </ul>
+
+          <div
+            class="warning-box"
+            style="
+              background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+              border-left-color: var(--color-success);
+            "
+          >
+            <p
+              style="
+                color: var(--color-success);
+                font-weight: 600;
+                margin-bottom: var(--space-sm);
+              "
+            >
+              ⭐ 핵심 의결 안건 (인건비 방어용)
+            </p>
+            <div
+              class="code-block"
+              style="
+                background: rgba(0, 0, 0, 0.05);
+                color: var(--color-gray-800);
+              "
+            >
+              "본 이사회는 Pacemaker의 초기 프로그램 기획 및 펀딩 준비를 위해
+              Project Lead(대표)와 Technical Lead(CTO)를 실무 스태프로 임명하며,
+              추후 펀딩 확보 시 정식 급여 계약을 체결할 것을 승인한다."
+            </div>
+            <p
+              style="
+                font-size: 0.8125rem;
+                color: var(--color-gray-700);
+                margin-top: var(--space-sm);
+              "
+            >
+              ※ 이 한 줄이 있어야 나중에 대표가 월급을 가져갈 때 이해상충 문제를
+              피할 수 있음
+            </p>
+          </div>
+
+          <!-- 2. OTF 포털 등록 -->
+          <div
+            class="org-card"
+            style="
+              border-left-color: var(--color-secondary);
+              margin-top: var(--space-xl);
+            "
+          >
+            <h3 class="org-name">
+              2. OTF 포털 등록 및 자격 검증 (2월 초 ~ 중순)
+            </h3>
+            <p style="font-size: 0.875rem; color: var(--color-gray-600)">
+              OTF 신청은 7월이지만, 기관 등록은 미리 해야 합니다. 승인까지 몇
+              주가 걸릴 수 있습니다.
+            </p>
+          </div>
+
+          <ul class="checklist">
+            <li><strong>OTF 웹사이트 계정 생성:</strong> otf.ca 접속</li>
+            <li><strong>Organization Registration:</strong> 단체 정보 입력</li>
+            <li>
+              <strong>재무 서류 업로드:</strong> 준비해 둔 '개시
+              대차대조표(Opening Balance Sheet)' 제출<br />
+              <span style="font-size: 0.8125rem; color: var(--color-gray-600)"
+                >→ 자산 $1,000 / 부채 $1,000 (Director's Loan)이 찍힌 1장짜리
+                엑셀 파일</span
+              >
+            </li>
+            <li>
+              <strong>자격 승인 대기:</strong> OTF로부터 "Eligible to apply"
+              이메일을 받아야 함
+            </li>
+          </ul>
+
+          <!-- 3. 마이크로 파일럿 -->
+          <div
+            class="org-card"
+            style="
+              border-left-color: var(--color-accent);
+              margin-top: var(--space-xl);
+            "
+          >
+            <h3 class="org-name">
+              3. 증거 수집용 '마이크로 파일럿' 실행 (3월 ~ 5월)
+            </h3>
+            <p style="font-size: 0.875rem; color: var(--color-gray-600)">
+              신청서에 쓸 <strong>"한 줄의 강력한 팩트"</strong>를 만들기 위한
+              초단기 이벤트입니다. 거창할 필요 없습니다.
+            </p>
+          </div>
+
+          <ul class="checklist">
+            <li>
+              <strong>행사 기획:</strong> "AI-Native Dev/Design 워크숍" (1일
+              또는 주말 2일 과정)
+            </li>
+            <li>
+              <strong>모객:</strong> 온타리오 거주 한인/이민자 개발자 커뮤니티
+              등에서 10명 내외 모집 (무료 또는 소액 유료)
+            </li>
+            <li>
+              <strong>핵심 활동:</strong>
+              <ul
+                style="
+                  list-style: disc;
+                  padding-left: var(--space-lg);
+                  margin-top: var(--space-xs);
+                "
+              >
+                <li style="border: none; padding-left: 0">
+                  AI 코딩 툴(Cursor 등) 시연 및 실습
+                </li>
+                <li style="border: none; padding-left: 0">
+                  디렉터급 멘토의 1:1 커리어 상담 (맛보기)
+                </li>
+              </ul>
+            </li>
+          </ul>
+
+          <div class="key-strategy">
+            <h4>📊 데이터 수집 (가장 중요)</h4>
+            <p>
+              <strong>참가자 설문조사:</strong> "이 프로그램이 정식 8주 과정으로
+              나온다면 참여하겠는가?" (Yes 90% 이상 목표)<br />
+              <strong>인터뷰 영상/사진:</strong> 현장의 열기를 담은 사진 3장
+              이상 확보<br /><br />
+              <em style="color: rgba(255, 255, 255, 0.8)"
+                >→ 이 데이터가 나중에 신청서 질문 "Does this program meet a
+                community need?"의 답변이 됨</em
+              >
+            </p>
+          </div>
+
+          <!-- 4. 파트너십 레터 -->
+          <div
+            class="org-card"
+            style="
+              border-left-color: var(--color-success);
+              margin-top: var(--space-xl);
+            "
+          >
+            <h3 class="org-name">
+              4. 파트너십 레터(Letter of Support) 확보 (5월 ~ 6월)
+            </h3>
+            <p style="font-size: 0.875rem; color: var(--color-gray-600)">
+              우리끼리만 하는 게 아니라, <strong>커뮤니티가 지지한다</strong>는
+              것을 보여줘야 합니다.
+            </p>
+          </div>
+
+          <ul class="checklist">
+            <li>
+              <strong>멘토 그룹:</strong> "Pacemaker의 취지에 공감하며, 펀딩
+              선정 시 멘토로 참여하겠다"는 의향서(이메일도 가능) 받아두기
+            </li>
+            <li>
+              <strong>협력 기관:</strong> (가능하다면) 한인회, 대학 동아리, 또는
+              현지 IT 커뮤니티 등에서 "홍보를 돕겠다"는 가벼운 지지 서신 1~2장
+              확보
+            </li>
+          </ul>
+
+          <!-- 5. 그랜트 신청서 작성 -->
+          <div
+            class="org-card"
+            style="
+              border-left-color: var(--color-warning);
+              margin-top: var(--space-xl);
+            "
+          >
+            <h3 class="org-name">5. 그랜트 신청서 작성 및 이사회 승인 (7월)</h3>
+            <p style="font-size: 0.875rem; color: var(--color-gray-600)">
+              최종 마무리 및 제출
+            </p>
+          </div>
+
+          <ul class="checklist">
+            <li>
+              <strong>신청서 초안 작성:</strong> 1~2월에 기획한 내용을 바탕으로
+              OTF 질문 항목 채우기
+            </li>
+            <li>
+              <strong>예산안(Budget) 확정:</strong> 앞서 짠 $62,500 예산안 엑셀
+              파일 최종 점검
+            </li>
+            <li>
+              <strong>이사회 신청 승인:</strong> "OTF Seed Grant에 신청서를
+              제출하는 것을 승인함"이라는 이사회 의결(Board Resolution) 서명
+              받기<br />
+              <span style="font-size: 0.8125rem; color: var(--color-gray-600)"
+                >→ 신청 시 필수 제출 서류는 아니지만, 보관용으로 필요</span
+              >
+            </li>
+            <li style="font-weight: 700; color: var(--color-danger)">
+              <strong>⭐ 7/22 접수 시작 즉시 제출</strong>
+            </li>
+          </ul>
+
+          <!-- 최종 타임라인 요약 -->
+          <div
+            style="
+              background: linear-gradient(
+                135deg,
+                var(--color-primary) 0%,
+                var(--color-secondary) 100%
+              );
+              color: white;
+              padding: var(--space-xl);
+              border-radius: var(--radius-lg);
+              margin-top: var(--space-2xl);
+            "
+          >
+            <h4
+              style="
+                color: var(--color-accent);
+                font-size: 0.875rem;
+                font-weight: 700;
+                letter-spacing: 0.1em;
+                text-transform: uppercase;
+                margin-bottom: var(--space-lg);
+              "
+            >
+              📅 타임라인 요약
+            </h4>
+            <div
+              style="
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+                gap: var(--space-md);
+              "
+            >
+              <div
+                style="
+                  text-align: center;
+                  padding: var(--space-md);
+                  background: rgba(255, 255, 255, 0.1);
+                  border-radius: var(--radius-md);
+                "
+              >
+                <div style="font-weight: 700; color: var(--color-accent)">
+                  1월
+                </div>
+                <div style="font-size: 0.8125rem; opacity: 0.9">
+                  법인 설립 + 첫 이사회
+                </div>
+              </div>
+              <div
+                style="
+                  text-align: center;
+                  padding: var(--space-md);
+                  background: rgba(255, 255, 255, 0.1);
+                  border-radius: var(--radius-md);
+                "
+              >
+                <div style="font-weight: 700; color: var(--color-accent)">
+                  2월
+                </div>
+                <div style="font-size: 0.8125rem; opacity: 0.9">
+                  OTF 포털 등록
+                </div>
+              </div>
+              <div
+                style="
+                  text-align: center;
+                  padding: var(--space-md);
+                  background: rgba(255, 255, 255, 0.1);
+                  border-radius: var(--radius-md);
+                "
+              >
+                <div style="font-weight: 700; color: var(--color-accent)">
+                  3~5월
+                </div>
+                <div style="font-size: 0.8125rem; opacity: 0.9">
+                  마이크로 파일럿
+                </div>
+              </div>
+              <div
+                style="
+                  text-align: center;
+                  padding: var(--space-md);
+                  background: rgba(255, 255, 255, 0.1);
+                  border-radius: var(--radius-md);
+                "
+              >
+                <div style="font-weight: 700; color: var(--color-accent)">
+                  5~6월
+                </div>
+                <div style="font-size: 0.8125rem; opacity: 0.9">
+                  파트너십 레터
+                </div>
+              </div>
+              <div
+                style="
+                  text-align: center;
+                  padding: var(--space-md);
+                  background: rgba(255, 255, 255, 0.15);
+                  border-radius: var(--radius-md);
+                  border: 1px solid var(--color-accent);
+                "
+              >
+                <div style="font-weight: 700; color: var(--color-accent)">
+                  7월
+                </div>
+                <div style="font-size: 0.8125rem; opacity: 0.9">
+                  신청서 제출 🚀
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <footer class="footer">
+      <p>© 2026 Pacemaker. All rights reserved.</p>
+    </footer>
+  </body>
+</html>
