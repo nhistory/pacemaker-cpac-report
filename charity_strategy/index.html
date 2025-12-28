@@ -1,0 +1,1074 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="캐나다 비영리 조직 CPAC Foundation, Autism in Mind, NPower Canada의 수익 모델과 멤버십 구조 분석"
+    />
+    <title>자선단체 수익 모델 및 장단점 분석 | Pacemaker</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;600;700&family=Noto+Sans+KR:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      :root {
+        --color-primary: #051c2c;
+        --color-secondary: #0f4c81;
+        --color-accent: #00a3e0;
+        --color-white: #ffffff;
+        --color-gray-50: #f8f9fa;
+        --color-gray-100: #f1f3f5;
+        --color-gray-200: #e9ecef;
+        --color-gray-300: #dee2e6;
+        --color-gray-600: #6c757d;
+        --color-gray-700: #495057;
+        --color-gray-800: #343a40;
+        --color-gray-900: #212529;
+        --color-success: #198754;
+        --color-warning: #ffc107;
+        --color-danger: #dc3545;
+        --font-serif: "Noto Serif KR", Georgia, serif;
+        --font-sans: "Noto Sans KR", -apple-system, sans-serif;
+        --space-xs: 0.25rem;
+        --space-sm: 0.5rem;
+        --space-md: 1rem;
+        --space-lg: 1.5rem;
+        --space-xl: 2rem;
+        --space-2xl: 3rem;
+        --space-3xl: 4rem;
+        --radius-sm: 4px;
+        --radius-md: 8px;
+        --radius-lg: 12px;
+        --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+        --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.07);
+      }
+
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      html {
+        font-size: 16px;
+        scroll-behavior: smooth;
+      }
+
+      body {
+        font-family: var(--font-sans);
+        line-height: 1.7;
+        color: var(--color-gray-800);
+        background-color: var(--color-gray-50);
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .container {
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 0 var(--space-lg);
+      }
+
+      /* Header */
+      .header {
+        background: linear-gradient(
+          135deg,
+          var(--color-primary) 0%,
+          var(--color-secondary) 100%
+        );
+        color: var(--color-white);
+        padding: var(--space-3xl) var(--space-xl);
+        text-align: center;
+      }
+
+      .back-link {
+        display: inline-flex;
+        align-items: center;
+        gap: var(--space-sm);
+        color: var(--color-accent);
+        text-decoration: none;
+        font-size: 0.875rem;
+        margin-bottom: var(--space-lg);
+      }
+
+      .back-link::before {
+        content: "←";
+      }
+
+      .report-date {
+        font-size: 0.75rem;
+        font-weight: 600;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        color: var(--color-accent);
+        margin-bottom: var(--space-md);
+      }
+
+      .header-title {
+        font-family: var(--font-serif);
+        font-size: clamp(1.75rem, 4vw, 2.5rem);
+        font-weight: 700;
+        margin-bottom: var(--space-md);
+      }
+
+      .header-subtitle {
+        font-size: 1.125rem;
+        color: rgba(255, 255, 255, 0.85);
+        max-width: 700px;
+        margin: 0 auto;
+      }
+
+      /* Main Content */
+      main {
+        flex: 1;
+        padding: var(--space-3xl) 0;
+      }
+
+      /* Section */
+      .section {
+        background: var(--color-white);
+        border-radius: var(--radius-lg);
+        box-shadow: var(--shadow-md);
+        padding: var(--space-xl);
+        margin-bottom: var(--space-xl);
+      }
+
+      .section-number {
+        font-family: var(--font-serif);
+        font-size: 0.875rem;
+        font-weight: 700;
+        color: var(--color-accent);
+        margin-bottom: var(--space-sm);
+      }
+
+      .section-title {
+        font-family: var(--font-serif);
+        font-size: 1.5rem;
+        color: var(--color-primary);
+        margin-bottom: var(--space-lg);
+        padding-bottom: var(--space-md);
+        border-bottom: 2px solid var(--color-gray-200);
+      }
+
+      .section-intro {
+        color: var(--color-gray-700);
+        margin-bottom: var(--space-lg);
+      }
+
+      /* Subsection */
+      .subsection {
+        margin-bottom: var(--space-xl);
+      }
+
+      .subsection-title {
+        font-family: var(--font-serif);
+        font-size: 1.125rem;
+        color: var(--color-secondary);
+        margin-bottom: var(--space-md);
+        padding-bottom: var(--space-sm);
+        border-bottom: 1px solid var(--color-gray-200);
+      }
+
+      .subsection-content {
+        color: var(--color-gray-700);
+        line-height: 1.8;
+      }
+
+      .subsection-content p {
+        margin-bottom: var(--space-md);
+      }
+
+      /* Organization Card */
+      .org-card {
+        background: var(--color-gray-50);
+        border-radius: var(--radius-md);
+        padding: var(--space-lg);
+        margin-bottom: var(--space-lg);
+        border-left: 4px solid var(--color-secondary);
+      }
+
+      .org-card.cpac {
+        border-left-color: #0f4c81;
+      }
+      .org-card.aim {
+        border-left-color: #198754;
+      }
+      .org-card.npower {
+        border-left-color: #dc3545;
+      }
+
+      .org-name {
+        font-family: var(--font-serif);
+        font-size: 1.25rem;
+        font-weight: 600;
+        color: var(--color-primary);
+        margin-bottom: var(--space-sm);
+      }
+
+      .org-meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--space-lg);
+        font-size: 0.875rem;
+        color: var(--color-gray-600);
+      }
+
+      .org-meta-item span {
+        font-weight: 600;
+        color: var(--color-gray-800);
+      }
+
+      /* Summary Table */
+      .summary-table-wrapper {
+        overflow-x: auto;
+        margin: var(--space-lg) 0;
+        border-radius: var(--radius-md);
+        border: 1px solid var(--color-gray-200);
+      }
+
+      .summary-table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 0.875rem;
+      }
+
+      .summary-table th {
+        background-color: var(--color-primary);
+        color: white;
+        padding: var(--space-md);
+        text-align: left;
+        font-size: 0.8125rem;
+        font-weight: 600;
+      }
+
+      .summary-table td {
+        padding: var(--space-md);
+        border-bottom: 1px solid var(--color-gray-200);
+        vertical-align: top;
+      }
+
+      .summary-table tr:nth-child(even) td {
+        background-color: var(--color-gray-50);
+      }
+
+      .summary-table tr:last-child td {
+        border-bottom: none;
+      }
+
+      /* Pros/Cons */
+      .pros-cons-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: var(--space-lg);
+        margin-top: var(--space-lg);
+      }
+
+      .pros-box,
+      .cons-box {
+        background: var(--color-white);
+        border-radius: var(--radius-md);
+        padding: var(--space-lg);
+        border: 1px solid var(--color-gray-200);
+      }
+
+      .pros-box {
+        border-top: 3px solid var(--color-success);
+      }
+
+      .cons-box {
+        border-top: 3px solid var(--color-danger);
+      }
+
+      .pros-box h4,
+      .cons-box h4 {
+        font-size: 0.875rem;
+        font-weight: 600;
+        margin-bottom: var(--space-md);
+        display: flex;
+        align-items: center;
+        gap: var(--space-sm);
+      }
+
+      .pros-box h4 {
+        color: var(--color-success);
+      }
+      .cons-box h4 {
+        color: var(--color-danger);
+      }
+
+      .pros-box ul,
+      .cons-box ul {
+        list-style: none;
+        font-size: 0.9375rem;
+        color: var(--color-gray-700);
+      }
+
+      .pros-box li,
+      .cons-box li {
+        padding: var(--space-sm) 0;
+        padding-left: var(--space-lg);
+        position: relative;
+      }
+
+      .pros-box li::before {
+        content: "✓";
+        position: absolute;
+        left: 0;
+        color: var(--color-success);
+        font-weight: bold;
+      }
+
+      .cons-box li::before {
+        content: "✗";
+        position: absolute;
+        left: 0;
+        color: var(--color-danger);
+        font-weight: bold;
+      }
+
+      /* Highlight Box */
+      .highlight-box {
+        background: linear-gradient(
+          135deg,
+          var(--color-primary) 0%,
+          var(--color-secondary) 100%
+        );
+        color: white;
+        padding: var(--space-lg);
+        border-radius: var(--radius-md);
+        margin: var(--space-lg) 0;
+      }
+
+      .highlight-box h4 {
+        color: var(--color-accent);
+        font-size: 0.75rem;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        margin-bottom: var(--space-sm);
+      }
+
+      .highlight-box p {
+        margin: 0;
+        line-height: 1.6;
+      }
+
+      .highlight-box strong {
+        color: var(--color-accent);
+      }
+
+      /* Info Box */
+      .info-box {
+        background: var(--color-gray-50);
+        border-radius: var(--radius-md);
+        padding: var(--space-lg);
+        margin: var(--space-lg) 0;
+        border-left: 4px solid var(--color-accent);
+      }
+
+      .info-box h4 {
+        font-size: 0.875rem;
+        font-weight: 600;
+        color: var(--color-secondary);
+        margin-bottom: var(--space-md);
+      }
+
+      .info-box p {
+        font-size: 0.9375rem;
+        color: var(--color-gray-700);
+        margin: 0;
+      }
+
+      /* Recommendation Cards */
+      .recommendation-card {
+        background: var(--color-white);
+        border-radius: var(--radius-md);
+        padding: var(--space-lg);
+        margin-bottom: var(--space-lg);
+        border: 1px solid var(--color-gray-200);
+        border-left: 4px solid var(--color-accent);
+      }
+
+      .recommendation-card h4 {
+        font-family: var(--font-serif);
+        font-size: 1rem;
+        color: var(--color-primary);
+        margin-bottom: var(--space-sm);
+      }
+
+      .recommendation-card p {
+        font-size: 0.9375rem;
+        color: var(--color-gray-700);
+        margin: 0;
+        line-height: 1.7;
+      }
+
+      /* Finance Details */
+      .finance-item {
+        display: flex;
+        justify-content: space-between;
+        padding: var(--space-sm) 0;
+        border-bottom: 1px dashed var(--color-gray-200);
+        font-size: 0.875rem;
+      }
+
+      .finance-item:last-child {
+        border-bottom: none;
+      }
+
+      .finance-label {
+        color: var(--color-gray-700);
+      }
+
+      .finance-value {
+        font-weight: 600;
+        font-family: "SF Mono", Consolas, monospace;
+      }
+
+      /* Footer */
+      .footer {
+        background-color: var(--color-gray-900);
+        color: var(--color-white);
+        padding: var(--space-xl);
+        text-align: center;
+        margin-top: auto;
+      }
+
+      .footer p {
+        font-size: 0.875rem;
+        opacity: 0.7;
+      }
+
+      @media (max-width: 640px) {
+        .header {
+          padding: var(--space-2xl) var(--space-lg);
+        }
+        .section {
+          padding: var(--space-lg);
+        }
+        .pros-cons-grid {
+          grid-template-columns: 1fr;
+        }
+        .summary-table th,
+        .summary-table td {
+          padding: var(--space-sm);
+          font-size: 0.8125rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="header">
+      <a href="../" class="back-link">보고서 목록으로 돌아가기</a>
+      <p class="report-date">December 2025</p>
+      <h1 class="header-title">자선단체 수익 모델 및 장단점 분석</h1>
+      <p class="header-subtitle">
+        캐나다 비영리 조직 CPAC Foundation, Autism in Mind, NPower Canada의 수익
+        모델과 멤버십 구조 심층 분석
+      </p>
+    </header>
+
+    <main>
+      <div class="container">
+        <!-- Section 01: Executive Summary -->
+        <section class="section">
+          <span class="section-number">Section 01</span>
+          <h2 class="section-title">총괄 요약 (Executive Summary)</h2>
+
+          <p class="section-intro">
+            본 보고서는 캐나다의 비영리 및 자선 부문에서 독특한 위치를 점유하고
+            있는 세 개의 주요 조직, 즉
+            <strong
+              >CPAC (Chinese Professionals Association of Canada)
+              Foundation</strong
+            >, <strong>Autism in Mind (AIM) Children's Charity</strong>, 그리고
+            <strong>NPower Canada</strong>에 대한 포괄적이고 전문적인 분석을
+            제공한다.
+          </p>
+
+          <div class="summary-table-wrapper">
+            <table class="summary-table">
+              <thead>
+                <tr>
+                  <th>조직명</th>
+                  <th>주요 분류</th>
+                  <th>핵심 대상</th>
+                  <th>주요 활동</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>CPAC Foundation</strong></td>
+                  <td>전문가 협회 및 자선 재단</td>
+                  <td>중국계 및 아시아계 이민자</td>
+                  <td>자격 인증 지원, 멘토링, 반인종차별 옹호</td>
+                </tr>
+                <tr>
+                  <td><strong>Autism in Mind (AIM)</strong></td>
+                  <td>자선형 서비스 제공자</td>
+                  <td>자폐 스펙트럼 아동 및 가족</td>
+                  <td>ABA/IBI 치료, 작업/언어 치료, 사립학교 운영</td>
+                </tr>
+                <tr>
+                  <td><strong>NPower Canada</strong></td>
+                  <td>인력 개발(Workforce Dev)</td>
+                  <td>저소득 청년, 이민자, 구직자</td>
+                  <td>무료 IT 직무 교육, 취업 알선, 동문 지원</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="highlight-box">
+            <h4>💡 핵심 발견</h4>
+            <p>
+              세 조직은 각기 다른 대상 그룹을 타깃으로 삼고 있으며, 이에 따라
+              상이한 재정 전략을 구사하고 있다.
+              <strong>CPAC</strong>은 '협회'와 '재단'의 하이브리드 모델,
+              <strong>AIM</strong>은 '서비스 수수료' 기반 사회적 기업 형태,
+              <strong>NPower</strong>는 정부 보조금과 기업 파트너십에 의존하는
+              '성과 기반 펀딩' 모델을 채택하고 있다.
+            </p>
+          </div>
+        </section>
+
+        <!-- Section 02: 연구 배경 -->
+        <section class="section">
+          <span class="section-number">Section 02</span>
+          <h2 class="section-title">서론: 캐나다 비영리 섹터의 재정 환경</h2>
+
+          <div class="subsection">
+            <h3 class="subsection-title">2.1 연구 배경 및 목적</h3>
+            <div class="subsection-content">
+              <p>
+                캐나다의 비영리 및 자선 섹터는
+                <strong>정부 자금의 축소</strong>,
+                <strong>기부 문화의 변화</strong>, 그리고
+                <strong>서비스 수요의 폭발적 증가</strong>라는 삼중고에 직면해
+                있다. 이러한 환경에서 조직들은 전통적인 기부 의존 모델에서
+                벗어나, 자체 수익을 창출하거나 정부 및 기업과의 파트너십을
+                강화하는 등 다양한 생존 전략을 모색하고 있다.
+              </p>
+              <p>
+                본 연구의 목적은 서로 다른 섹터(전문직 협회, 보건/복지, 인력
+                개발)에서 활동하는 세 조직의 사례를 통해, 비영리 조직이 어떻게
+                재정적 지속 가능성을 확보하고 회원들에게 가치를 환원하는지를
+                심층적으로 파헤치는 것이다.
+              </p>
+            </div>
+          </div>
+
+          <div class="subsection">
+            <h3 class="subsection-title">2.2 자료 수집 및 분석 방법론</h3>
+            <div class="subsection-content">
+              <p>
+                본 보고서는 1차적으로 각 조직의 공식 웹사이트, 연례
+                보고서(Annual Reports), 재무제표, 그리고 캐나다 국세청(CRA)에
+                제출된
+                <strong>T3010(Registered Charity Information Return)</strong>
+                데이터를 기반으로 정량적 분석을 수행하였다.
+              </p>
+              <p>
+                또한, Reddit, Glassdoor, Facebook 그룹 등 커뮤니티에서 수집된
+                실제 이용자들의 리뷰와 경험담을 정성적으로 분석하여 데이터의
+                맥락을 보완하였다. 특히, 각 조직의 수익 구조가 서비스 품질과
+                멤버십 혜택에 미치는 인과 관계를 규명하기 위해
+                <strong>'가치 사슬 분석(Value Chain Analysis)'</strong> 및
+                <strong>'이해관계자 이론(Stakeholder Theory)'</strong>을
+                적용하였다.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Section 03: CPAC 분석 -->
+        <section class="section">
+          <span class="section-number">Section 03</span>
+          <h2 class="section-title">CPAC Foundation 분석</h2>
+
+          <div class="org-card cpac">
+            <h3 class="org-name">
+              CPAC (Chinese Professionals Association of Canada)
+            </h3>
+            <div class="org-meta">
+              <div class="org-meta-item">
+                재단 등록번호: <span>864306626RR0001</span>
+              </div>
+              <div class="org-meta-item">
+                모델 유형:
+                <span>협회(Association) + 재단(Foundation) 이중 구조</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="subsection">
+            <h3 class="subsection-title">3.1 이중 법인 구조의 전략적 의미</h3>
+            <div class="subsection-content">
+              <p>
+                CPAC은 캐나다 내에서 매우 독특한
+                <strong>'이중 법인 구조'</strong>를 가지고 있다. 이는 회원들의
+                권익을 대변하는 비영리 단체인
+                <strong>CPAC(Association)</strong>과 자선 목적의 활동을 수행하는
+                <strong>CPAC Foundation</strong>으로 나뉜다.
+              </p>
+              <p>
+                <strong>협회(Association)</strong>는 회비와 서비스 수수료를 통해
+                운영 자금을 조달하며, 회원의 직접적인 이익(취업, 할인 등)에
+                집중한다. 반면, <strong>재단(Foundation)</strong>은 기부금
+                영수증 발행이 가능한 자선 단체로서, 장학금 지급, 교육 연구,
+                인종차별 반대 운동 등 공익적 목적을 수행한다.
+              </p>
+            </div>
+          </div>
+
+          <div class="subsection">
+            <h3 class="subsection-title">3.2 수익 모델 상세 분석</h3>
+            <div class="info-box">
+              <h4>💰 멤버십 회비 구조: 평생 회원제의 경제학</h4>
+              <p>
+                정회원은 일회성 비용인 <strong>$130 + HST</strong>를 납부하면
+                평생 회원 자격을 얻는다. 학생 회원은 동일한 비용으로 5년 기한의
+                멤버십을 가지며, 졸업 후 정회원으로 전환된다. 이러한 평생 회비는
+                단기적인 현금 유입에는 도움이 되지만, 장기적인 운영 비용을
+                충당하기에는 부족한 금액이다.
+              </p>
+            </div>
+
+            <div class="info-box">
+              <h4>🤝 제휴 수익(Affiliate Revenue) 및 기업 파트너십</h4>
+              <p>
+                CPAC 수익 모델의 핵심 축 중 하나는
+                <strong>TD Insurance Meloche Monnex</strong> 등 대형 금융
+                기관과의 파트너십이다. CPAC은 회원들에게 단체 할인율(Preferred
+                Rate)을 제공하고, 그 대가로 보험사로부터 제휴 수수료나 후원금을
+                받는 구조를 취한다. 이는 전형적인 '제휴 마케팅' 모델로, 회원은
+                저렴한 보험료 혜택을 받고, 협회는 운영 자금을 확보하며, 기업은
+                우량 고객을 확보하는 <strong>'Win-Win-Win' 전략</strong>이다.
+              </p>
+            </div>
+          </div>
+
+          <div class="subsection">
+            <h3 class="subsection-title">3.3 장단점 분석</h3>
+            <div class="pros-cons-grid">
+              <div class="pros-box">
+                <h4>✓ 장점 (Pros)</h4>
+                <ul>
+                  <li>RBC 멘토링 프로그램을 통한 취업 성공률 향상</li>
+                  <li>$130 평생 회비의 경제적 가치 (보험료 절감 가능)</li>
+                  <li>TD Insurance 단체 할인율 제공</li>
+                  <li>CSI 교육 과정 10% 할인, ROM 입장료 할인</li>
+                  <li>전문가 커뮤니티 네트워크 접근성</li>
+                  <li>정부 보조금 활용 브리징 프로그램</li>
+                </ul>
+              </div>
+              <div class="cons-box">
+                <h4>✗ 단점 (Cons)</h4>
+                <ul>
+                  <li>멘토의 질적 편차 및 매칭 어려움</li>
+                  <li>민족적 네트워크 폐쇄성 (Ethnic Enclave Risk)</li>
+                  <li>평생 회원제로 인한 재정적 지속 가능성 이슈</li>
+                  <li>
+                    미국 CPAC(정치단체)과 명칭 중복으로 인한 브랜드 리스크
+                  </li>
+                  <li>틈새 분야의 경우 적절한 멘토 부족</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Section 04: AIM 분석 -->
+        <section class="section">
+          <span class="section-number">Section 04</span>
+          <h2 class="section-title">Autism in Mind (AIM) 분석</h2>
+
+          <div class="org-card aim">
+            <h3 class="org-name">Autism in Mind (AIM) Children's Charity</h3>
+            <div class="org-meta">
+              <div class="org-meta-item">
+                등록번호: <span>763444645RR0001</span>
+              </div>
+              <div class="org-meta-item">
+                모델 유형: <span>서비스 제공형 자선단체 (Fee-for-Service)</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="subsection">
+            <h3 class="subsection-title">4.1 온타리오 자폐 치료 자금 환경</h3>
+            <div class="subsection-content">
+              <p>
+                AIM은 온타리오 주의 자폐 지원 시스템, 특히
+                <strong>온타리오 자폐 프로그램(OAP)</strong>의 만성적인 자금
+                부족과 대기 문제를 해결하기 위해 등장한
+                <strong>'서비스 제공형 자선단체'</strong>이다.
+              </p>
+              <p>
+                OAP는 연령과 필요에 따라 연간 $20,000(6세 미만)에서 최대
+                $65,000까지 지원하지만, 대기자 명단이 매우 길고, 실제 필요한
+                치료 비용(연간 $60,000 이상)을 충당하기에는 부족한 경우가 많다.
+                또한, <strong>OHIP(의료보험)</strong>은 자폐 치료의 핵심인
+                IBI/ABA를 커버하지 않는다.
+              </p>
+            </div>
+          </div>
+
+          <div class="subsection">
+            <h3 class="subsection-title">4.2 서비스 수수료 구조</h3>
+            <div class="summary-table-wrapper">
+              <table class="summary-table">
+                <thead>
+                  <tr>
+                    <th>서비스</th>
+                    <th>시간당 비용</th>
+                    <th>비고</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>행동 치료 (ABA/IBI)</td>
+                    <td><strong>$70</strong></td>
+                    <td>업계 평균($50~$150) 내 위치</td>
+                  </tr>
+                  <tr>
+                    <td>작업 치료 (OT)</td>
+                    <td><strong>$150</strong></td>
+                    <td>전문 치료사 필요</td>
+                  </tr>
+                  <tr>
+                    <td>언어 치료 (SLP)</td>
+                    <td><strong>$160</strong></td>
+                    <td>고도 전문 서비스</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="info-box">
+              <h4>💡 AIM Without Limits Subsidy Program</h4>
+              <p>
+                연 소득 <strong>$120,000 미만</strong>인 가정을 대상으로 하며,
+                정부 지원 대기 중인 경우 우선순위를 둔다. 보조금 재원은 'Toonie
+                4 Autism' 캠페인, 연례 갈라, 기업 후원 등을 통해 마련된다.
+              </p>
+            </div>
+          </div>
+
+          <div class="subsection">
+            <h3 class="subsection-title">4.3 장단점 분석</h3>
+            <div class="pros-cons-grid">
+              <div class="pros-box">
+                <h4>✓ 장점 (Pros)</h4>
+                <ul>
+                  <li>다학제적 팀: ABA, OT, SLP 치료사 한 공간 협력</li>
+                  <li>원스톱 서비스로 부모의 이동 번거로움 감소</li>
+                  <li>사립 학교 프로그램 운영 (치료+교육 병행)</li>
+                  <li>Project Impact: 부모 역량 강화 무료 코칭</li>
+                  <li>정부 시스템 공백을 채우는 중요한 역할</li>
+                </ul>
+              </div>
+              <div class="cons-box">
+                <h4>✗ 단점 (Cons)</h4>
+                <ul>
+                  <li>높은 재정적 진입 장벽 (연간 수만 달러)</li>
+                  <li>지리적 제한 (마컴, 리치먼드 힐 중심)</li>
+                  <li>보조금 수용 인원 제한적</li>
+                  <li>기부금 감소 시 보조금 축소 위험</li>
+                  <li>ABA 분야 높은 이직률로 인한 품질 리스크</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Section 05: NPower Canada 분석 -->
+        <section class="section">
+          <span class="section-number">Section 05</span>
+          <h2 class="section-title">NPower Canada 분석</h2>
+
+          <div class="org-card npower">
+            <h3 class="org-name">NPower Canada</h3>
+            <div class="org-meta">
+              <div class="org-meta-item">
+                모델 유형: <span>성과 기반 정부/기업 펀딩 (B2B/B2G)</span>
+              </div>
+              <div class="org-meta-item">
+                교육비용: <span>무료 (참여자 부담 $0)</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="subsection">
+            <h3 class="subsection-title">
+              5.1 수익 모델: 듀얼 클라이언트(Dual Client)
+            </h3>
+            <div class="subsection-content">
+              <p>
+                NPower Canada는 '인력 개발(Workforce Development)' 분야에서 가장
+                혁신적이고 확장 가능한 모델을 보여주는 조직이다. 이들의 핵심은
+                <strong>교육생에게 비용을 받지 않고</strong>, 대신 정부와
+                기업에게 '준비된 인재'를 공급하는 대가로 운영 자금을 조달하는
+                <strong>B2B/B2G 모델</strong>이다.
+              </p>
+            </div>
+
+            <div class="info-box">
+              <h4>📊 자금 조달 믹스 (2023년 기준)</h4>
+              <div class="finance-item">
+                <span class="finance-label">정부 보조금 의존도</span>
+                <span class="finance-value">~75%</span>
+              </div>
+              <div class="finance-item">
+                <span class="finance-label">연방정부 지원금</span>
+                <span class="finance-value">$9,730,000</span>
+              </div>
+              <div class="finance-item">
+                <span class="finance-label">주정부 지원금</span>
+                <span class="finance-value">$3,180,000</span>
+              </div>
+              <div class="finance-item">
+                <span class="finance-label">기업 및 재단 후원</span>
+                <span class="finance-value">~25%</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="subsection">
+            <h3 class="subsection-title">5.2 동문(Alumni) 구조: 5년의 약속</h3>
+            <div class="subsection-content">
+              <p>
+                NPower의 멤버십은 교육 과정 중에는 '참여자(Participant)'로, 수료
+                후에는 <strong>'동문(Alumni)'</strong>으로 정의된다. 졸업생은
+                수료 후 <strong>5년 동안</strong> 지속적인 지원을 받는다.
+              </p>
+            </div>
+
+            <div class="summary-table-wrapper">
+              <table class="summary-table">
+                <thead>
+                  <tr>
+                    <th>기간</th>
+                    <th>지원 내용</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong>초기 6개월</strong></td>
+                    <td>
+                      집중적인 취업 알선, 커리어 전문가(CES) 배정, 기업 매칭
+                      서비스
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><strong>이후 4.5년</strong></td>
+                    <td>
+                      멘토링, 고급 기술 교육(Upskilling), 경력 상담, 네트워킹
+                      이벤트
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><strong>무료 심화 교육</strong></td>
+                    <td>
+                      Google Project Management, Cybersecurity, Data Analytics
+                      등 자격증 과정
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="subsection">
+            <h3 class="subsection-title">5.3 장단점 분석</h3>
+            <div class="pros-cons-grid">
+              <div class="pros-box">
+                <h4>✓ 장점 (Pros)</h4>
+                <ul>
+                  <li>금전적 투자 없이 시장 가치 자격증 습득</li>
+                  <li>무한대 ROI: 참여자 비용 $0</li>
+                  <li>기업 직결 파이프라인으로 높은 취업 성공률</li>
+                  <li>5년간 지속적인 동문 지원</li>
+                  <li>Microsoft, Google, TD Bank 등 파트너</li>
+                </ul>
+              </div>
+              <div class="cons-box">
+                <h4>✗ 단점 (Cons)</h4>
+                <ul>
+                  <li>엄격한 규율: 지각, 결석 시 프로그램 제명 가능</li>
+                  <li>온라인 수업 시 카메라 켜기 의무화</li>
+                  <li>IT 경기 침체 시 취업 지연 가능성</li>
+                  <li>'직장 시뮬레이션' 방식의 높은 스트레스</li>
+                  <li>Coursera 기반으로 전공자에게는 기초적</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Section 06: 비교 분석 -->
+        <section class="section">
+          <span class="section-number">Section 06</span>
+          <h2 class="section-title">비교 분석: 3가지 모델의 전략적 대조</h2>
+
+          <div class="subsection">
+            <h3 class="subsection-title">6.1 수익 모델 및 재정 안정성 비교</h3>
+            <div class="summary-table-wrapper">
+              <table class="summary-table">
+                <thead>
+                  <tr>
+                    <th>구분</th>
+                    <th>CPAC Foundation</th>
+                    <th>Autism in Mind</th>
+                    <th>NPower Canada</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong>모델 유형</strong></td>
+                    <td>회원제 + 후원형</td>
+                    <td>사회적 기업형 (Fee-for-Service)</td>
+                    <td>성과 기반 정부/기업 펀딩</td>
+                  </tr>
+                  <tr>
+                    <td><strong>주 수익원</strong></td>
+                    <td>멤버십 회비, 보험 제휴 수익, 갈라 후원</td>
+                    <td>치료비(수수료), 기부금</td>
+                    <td>정부 보조금(75%), 기업 후원</td>
+                  </tr>
+                  <tr>
+                    <td><strong>재정 리스크</strong></td>
+                    <td>회원 고령화, 신규 유입 정체</td>
+                    <td>경기 침체 시 기부금 감소</td>
+                    <td>정부 정책 변경 시 직격탄</td>
+                  </tr>
+                  <tr>
+                    <td><strong>비용 전가</strong></td>
+                    <td>회원 부담 ($130 평생)</td>
+                    <td>사용자 부담 높음 ($70-$160/시간)</td>
+                    <td>사용자 부담 없음 ($0)</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="subsection">
+            <h3 class="subsection-title">6.2 멤버십 가치 및 참여 비용 비교</h3>
+            <div class="summary-table-wrapper">
+              <table class="summary-table">
+                <thead>
+                  <tr>
+                    <th>구분</th>
+                    <th>CPAC Foundation</th>
+                    <th>Autism in Mind</th>
+                    <th>NPower Canada</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong>가입/이용 비용</strong></td>
+                    <td>저비용 ($130 일회성)</td>
+                    <td>고비용 (연간 수만 달러)</td>
+                    <td>무료 (선발 과정 있음)</td>
+                  </tr>
+                  <tr>
+                    <td><strong>주요 혜택</strong></td>
+                    <td>네트워킹, 멘토링, 보험 할인</td>
+                    <td>통합 치료, 사립학교, 부모 교육</td>
+                    <td>직무 교육, 자격증, 취업 알선</td>
+                  </tr>
+                  <tr>
+                    <td><strong>핵심 가치</strong></td>
+                    <td>소속감 & 비용 절감</td>
+                    <td>치료 접근성 & 편의성</td>
+                    <td>경제적 자립 & 경력 이동</td>
+                  </tr>
+                  <tr>
+                    <td><strong>참여 강도</strong></td>
+                    <td>자율적 (필요할 때 이용)</td>
+                    <td>필수적 (정기적 치료 스케줄)</td>
+                    <td>강제적 (엄격한 출석/태도 관리)</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- Section 07: 결론 및 전략적 제언 -->
+        <section class="section">
+          <span class="section-number">Section 07</span>
+          <h2 class="section-title">결론 및 전략적 제언</h2>
+
+          <div class="recommendation-card">
+            <h4>🔵 CPAC: 전략적 활용을 위한 '스마트한 가입'</h4>
+            <p>
+              CPAC은 전문직 이민자에게 유용한 플랫폼이나, 그 가치는 사용자의
+              전략에 따라 달라진다. 평생 회비 $130은 TD 보험 할인 한 번으로도
+              회수 가능한 금액이므로, '경제적 혜택'을 목적으로 가입하는 것은
+              매우 합리적이다. 멘토링 프로그램은 초기 정착에 큰 도움이 되지만,
+              장기적인 커리어 발전을 위해서는 CPAC 외부의 주류 협회(CPA, PEO 등)
+              활동을 병행하여 '네트워크의 고립'을 방지해야 한다.
+            </p>
+          </div>
+
+          <div class="recommendation-card">
+            <h4>🟢 AIM: 재정 계획과 조기 개입의 균형</h4>
+            <p>
+              AIM은 정부 시스템의 실패를 보완하는 중요한 역할을 수행한다. OAP
+              대기 중인 부모에게는 AIM의 유료 서비스와 보조금 프로그램이 '골든
+              타임'을 놓치지 않게 하는 구명줄이 될 수 있다. 그러나 시간당
+              $70~$160에 달하는 비용은 장기적으로 지속 가능하지 않을 수 있다.
+              따라서 부모들은 AIM의 서비스를 이용하면서도, 지속적으로 정부
+              지원금(OAP) 신청 상태를 확인하고, 세금 공제(Medical Expense Tax
+              Credit) 및 사보험 혜택을 최대한 활용하는 치밀한 재무 계획을 세워야
+              한다.
+            </p>
+          </div>
+
+          <div class="recommendation-card">
+            <h4>🔴 NPower: 규율을 감내할 가치가 있는 '무료' 투자</h4>
+            <p>
+              NPower는 의지가 있는 구직자에게 최고의 기회를 제공한다. 정부와
+              기업이 비용을 대신 지불하는 구조 덕분에, 참여자는 금전적 리스크
+              없이 시장 가치를 높일 수 있다. 단, 이 프로그램은
+              <strong>'무료 학원'이 아니라 '직장'</strong>이라는 마인드로
+              접근해야 한다. 엄격한 규율과 출석 관리는 기업이 원하는 인재상에
+              맞추기 위한 훈련 과정임을 이해해야 한다. 또한, 5년 동안 제공되는
+              동문 혜택(심화 과정)을 적극 활용하여, 초급 직무에 머무르지 않고
+              지속적으로 경력을 업그레이드하는 것이 NPower 모델을 200% 활용하는
+              비결이다.
+            </p>
+          </div>
+
+          <div class="highlight-box">
+            <h4>📌 최종 결론</h4>
+            <p>
+              본 보고서의 분석이 각 조직의 이해관계자들에게 명확한 판단의 근거가
+              되기를 기대한다. 세 조직 모두 캐나다 비영리 섹터에서 각자의
+              방식으로 가치를 창출하고 있으며, 이용자는 자신의
+              <strong>상황과 목표에 맞는 조직</strong>을 선택하여 최대한의
+              혜택을 누릴 수 있을 것이다.
+            </p>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>© 2025 Pacemaker. All rights reserved.</p>
+      </div>
+    </footer>
+  </body>
+</html>
